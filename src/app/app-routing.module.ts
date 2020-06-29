@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RecommendedVideosComponent } from './video/recommended-videos/recommended-videos.component';
-import { SubscribedChannelsComponent } from './channel/subscribed-channels/subscribed-channels.component';
-import { MyPlaylistComponent } from './playlist/my-playlist/my-playlist.component';
 
 const routes: Routes = [
   {
     path: 'channel',
-    component: SubscribedChannelsComponent,
+    loadChildren: () =>
+      import('./channel/channel.module').then((mod) => mod.ChannelModule),
   },
   {
     path: 'playlist',
-    component: MyPlaylistComponent,
+    loadChildren: () =>
+      import('./playlist/playlist.module').then((mod) => mod.PlaylistModule),
   },
   {
     path: '',

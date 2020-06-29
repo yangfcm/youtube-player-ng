@@ -4,18 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoModule } from './video/video.module';
-import { ChannelModule } from './channel/channel.module';
-import { PlaylistModule } from './playlist/playlist.module';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    VideoModule,
-    ChannelModule,
-    PlaylistModule,
-  ],
+  declarations: [AppComponent, HeaderComponent],
+  imports: [BrowserModule, AppRoutingModule, VideoModule],
   providers: [],
   bootstrap: [AppComponent],
 })
