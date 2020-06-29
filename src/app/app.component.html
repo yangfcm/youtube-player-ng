@@ -1,7 +1,12 @@
-<app-header></app-header>
-<div>
-  <a routerLink="/">Home</a>
-  <a routerLink="/channel">Channel</a>
-  <a routerLink="/playlist">playlist</a>
+<div class="app-container">
+  <div class="app-body">
+    <app-header class="header"></app-header>
+    <div>
+      <a routerLink="/">Home</a>
+      <a routerLink="/channel">Channel</a>
+      <a routerLink="/playlist">playlist</a>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-footer></app-footer>
 </div>
-<router-outlet></router-outlet>
