@@ -37,7 +37,11 @@ export class RecommendedVideosComponent implements OnInit {
           this.videoData = data;
         },
         (err) => {
-          this.errorMessage = err.error.error.message;
+          if (!err.error.error) {
+            this.errorMessage = 'Failed to fetch videos';
+          } else {
+            this.errorMessage = err.error.error.message;
+          }
           this.videoData = undefined;
         }
       );

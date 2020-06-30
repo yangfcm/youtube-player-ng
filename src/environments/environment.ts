@@ -7,7 +7,7 @@ export const environment = {
   clientId:
     '256963892202-t60qss3bvmuf8tpsa29gu909o3df37o2.apps.googleusercontent.com',
   clientSecret: 'lyn5NUG9E0xrWZZV_BvAlUq8',
-  apiKey: 'AIzaSyCOoI9IdBROV2lRUS3S5ey86hALB2mAl7A',
+  apiKey: 'AIzaSyCOoI9IdBROV2lRUS3S5ey86hALB2mAl7A1',
   apiUrl: 'https://www.googleapis.com/youtube/v3',
 };
 

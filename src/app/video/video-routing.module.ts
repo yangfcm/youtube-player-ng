@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SubscribedChannelsComponent } from './subscribed-channels/subscribed-channels.component';
-import { ChannelDetailComponent } from './channel-detail/channel-detail.component';
+import { RecommendedVideosComponent } from './recommended-videos/recommended-videos.component';
+import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -11,11 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: ChannelDetailComponent,
+        component: VideoDetailComponent,
       },
       {
         path: '',
-        component: SubscribedChannelsComponent,
+        component: RecommendedVideosComponent,
       },
     ],
   },
@@ -25,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ChannelRoutingModule {}
+export class VideoRoutingModule {}

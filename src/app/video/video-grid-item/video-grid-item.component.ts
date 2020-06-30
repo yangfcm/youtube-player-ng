@@ -10,10 +10,12 @@ import { IVideoItem } from '../interfaces/videoItem';
       </div>
       <div class="content">
         <div class="header app-video-title">
-          <a> {{ video.snippet.title }}</a>
+          <a [routerLink]="'/video/' + video.id"> {{ video.snippet.title }}</a>
         </div>
         <div class="meta">
-          <a>{{ video.snippet.channelTitle }}</a>
+          <a [routerLink]="'/channel/' + video.snippet.channelId">{{
+            video.snippet.channelTitle
+          }}</a>
         </div>
       </div>
       <div class="extra content">

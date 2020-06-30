@@ -14,6 +14,11 @@ const routes: Routes = [
       import('./playlist/playlist.module').then((mod) => mod.PlaylistModule),
   },
   {
+    path: 'video',
+    loadChildren: () =>
+      import('./video/video.module').then((mod) => mod.VideoModule),
+  },
+  {
     path: '',
     component: RecommendedVideosComponent,
   },
