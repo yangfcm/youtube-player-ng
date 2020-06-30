@@ -4,7 +4,7 @@ import { IVideoItem } from '../interfaces/videoItem';
 @Component({
   selector: 'app-video-grid-item',
   template: `
-    <div class="ui card" style="height: 100%">
+    <div class="ui card" style="height: 100%; width: 100%;">
       <a class="image" [routerLink]="'/video/' + video.id">
         <img [src]="video.snippet.thumbnails.medium.url" />
       </a>
@@ -20,11 +20,10 @@ import { IVideoItem } from '../interfaces/videoItem';
       </div>
       <div class="extra content">
         <span class="right floated">
-          {{ video.snippet.publishedAt }}
+          {{ video.snippet.publishedAt | date: 'd LLL, yyyy' }}
         </span>
         <span>
-          <i class="user icon"></i>
-          {{ video.statistics.viewCount }}
+          {{ video.statistics.viewCount | number }}
         </span>
       </div>
     </div>
