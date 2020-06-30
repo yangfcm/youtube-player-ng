@@ -1,20 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IVideoItem } from '../interfaces/videoItem';
 
 @Component({
   selector: 'app-video-grid-item',
   template: `
-    <p>
-      video-grid-item works!
-    </p>
+    <div class="ui card" style="height: 100%">
+      <div class="image">
+        <img [src]="video.snippet.thumbnails.medium.url" />
+      </div>
+      <div class="content">
+        <div class="header app-video-title">
+          <a> {{ video.snippet.title }}</a>
+        </div>
+        <div class="meta">
+          <a>{{ video.snippet.channelTitle }}</a>
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          {{ video.snippet.publishedAt }}
+        </span>
+        <span>
+          <i class="user icon"></i>
+          {{ video.statistics.viewCount }}
+        </span>
+      </div>
+    </div>
   `,
   styles: [
-  ]
+    `
+      .app-video-title {
+        line-height: 23px;
+        max-height: 46px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    `,
+  ],
 })
 export class VideoGridItemComponent implements OnInit {
+  @Input() video: IVideoItem;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
