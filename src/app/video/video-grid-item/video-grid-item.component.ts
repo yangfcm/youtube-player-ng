@@ -6,11 +6,16 @@ import { IVideoItem } from '../interfaces/videoItem';
   template: `
     <div class="ui card" style="height: 100%; width: 100%;">
       <a class="image" [routerLink]="'/video/' + video.id">
-        <img [src]="video.snippet.thumbnails.medium.url" />
+        <img
+          [src]="video.snippet.thumbnails.medium.url"
+          [title]="video.snippet.title"
+        />
       </a>
       <div class="content">
         <div class="header app-video-title">
-          <a [routerLink]="'/video/' + video.id"> {{ video.snippet.title }}</a>
+          <a [routerLink]="'/video/' + video.id" [title]="video.snippet.title">
+            {{ video.snippet.title }}</a
+          >
         </div>
         <div class="meta">
           <a [routerLink]="'/channel/' + video.snippet.channelId">{{
