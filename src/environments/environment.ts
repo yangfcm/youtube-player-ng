@@ -9,6 +9,9 @@ export const environment = {
   clientSecret: 'lyn5NUG9E0xrWZZV_BvAlUq8',
   apiKey: 'AIzaSyCOoI9IdBROV2lRUS3S5ey86hALB2mAl7A',
   apiUrl: 'https://www.googleapis.com/youtube/v3',
+  errorMessage: {
+    failedToFetchVideo: 'Failed to fetch video',
+  },
 };
 
 /*
