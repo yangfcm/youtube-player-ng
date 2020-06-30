@@ -3,18 +3,15 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-subscribed-channels',
   template: `
+    <app-nav></app-nav>
     <p>
       subscribed-channels works!
     </p>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class SubscribedChannelsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

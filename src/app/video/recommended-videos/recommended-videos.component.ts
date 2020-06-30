@@ -6,6 +6,7 @@ import { IVideoData } from '../interfaces/videoData';
 @Component({
   selector: 'app-recommended-videos',
   template: `
+    <app-nav></app-nav>
     <app-loader *ngIf="!errorMessage && !videoData"></app-loader>
     <app-error-message *ngIf="errorMessage && !videoData">{{
       errorMessage
