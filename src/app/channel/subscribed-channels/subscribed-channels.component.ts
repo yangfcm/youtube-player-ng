@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-subscribed-channels',
   template: `
+    <app-user-banner></app-user-banner>
     <app-nav></app-nav>
     <p>
       subscribed-channels works!

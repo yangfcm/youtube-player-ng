@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { AuthModule } from '../auth/auth.module';
 import { VideoRoutingModule } from './video-routing.module';
 
 import { RecommendedVideosComponent } from './recommended-videos/recommended-videos.component';
@@ -21,6 +22,6 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
     HomeComponent,
     VideoDetailComponent,
   ],
-  imports: [CommonModule, VideoRoutingModule, SharedModule],
+  imports: [CommonModule, VideoRoutingModule, SharedModule, AuthModule],
 })
 export class VideoModule {}

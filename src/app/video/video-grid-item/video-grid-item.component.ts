@@ -5,9 +5,9 @@ import { IVideoItem } from '../interfaces/videoItem';
   selector: 'app-video-grid-item',
   template: `
     <div class="ui card" style="height: 100%">
-      <div class="image">
+      <a class="image" [routerLink]="'/video/' + video.id">
         <img [src]="video.snippet.thumbnails.medium.url" />
-      </div>
+      </a>
       <div class="content">
         <div class="header app-video-title">
           <a [routerLink]="'/video/' + video.id"> {{ video.snippet.title }}</a>
