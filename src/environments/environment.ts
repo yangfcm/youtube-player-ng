@@ -11,6 +11,7 @@ export const environment = {
   apiUrl: 'https://www.googleapis.com/youtube/v3',
   errorMessage: {
     failedToFetchVideo: 'Failed to fetch video',
+    failedToSearch: 'Failed to search resources',
   },
 };
 

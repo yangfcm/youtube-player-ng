@@ -1,10 +1,10 @@
-import { IVideoItem } from './videoItem';
+import { ISearchResultItem } from './searchResultItem';
 
-export interface IVideoData {
+export interface ISearchResultData {
   kind: string;
-  items: IVideoItem[];
   prevPageToken?: string;
   nextPageToken?: string;
+  items: ISearchResultItem[];
   pageInfo: {
     totalResults: number;
     resultsPerPage: number;

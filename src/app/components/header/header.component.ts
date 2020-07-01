@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../../search/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,11 @@ import { Component, OnInit } from '@angular/core';
       <div class="right menu">
         <div class="item">
           <div class="ui icon input" style="min-width: 10px;">
-            <input type="text" placeholder="Search video..." />
+            <input
+              type="text"
+              placeholder="Search video..."
+              [(ngModel)]="searchKeyWord"
+            />
             <i class="search icon link" (click)="handleSearch()"></i>
           </div>
           <div>
@@ -30,11 +36,14 @@ import { Component, OnInit } from '@angular/core';
   styles: [``],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  searchKeyWord = '';
+  constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit(): void {}
 
   handleSearch() {
-    console.log('search');
+    if (this.searchKeyWord.trim() === '') return;
+    this.router.navigateByUrl(`/search/${this.searchKeyWord.trim()}`);
+    this.searchKeyWord = '';
   }
 }

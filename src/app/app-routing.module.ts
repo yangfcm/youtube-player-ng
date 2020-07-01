@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./video/video.module').then((mod) => mod.VideoModule),
   },
   {
+    path: 'search',
+    loadChildren: () =>
+      import('./search/search.module').then((mod) => mod.SearchModule),
+  },
+  {
     path: '',
     component: RecommendedVideosComponent,
   },
