@@ -12,9 +12,37 @@ import { ISearchResultData } from '../interfaces/searchResultData';
     <app-error-message *ngIf="errorMessage && !searchResultData">{{
       errorMessage
     }}</app-error-message>
-    <ng-container *ngIf="!errorMessage && searchResultData">ok</ng-container>
+    <ng-container *ngIf="!errorMessage && searchResultData">
+      <div class="app-container">
+        <h2 class="ui header">
+          Search result with keyword:
+          <span class="ui header red">{{ searchKeyWord }}</span>
+        </h2>
+        <app-result-item
+          *ngFor="let item of searchResultData.items"
+          [item]="item"
+        ></app-result-item>
+        <div class="ui divider hidden"></div>
+        <div class="ui two column centered grid">
+          <div class="column">
+            <app-more-button
+              [nextPageToken]="searchResultData.nextPageToken"
+              (onNextPage)="handleNextPage($event)"
+              >More results...</app-more-button
+            >
+          </div>
+        </div>
+      </div>
+    </ng-container>
   `,
-  styles: [],
+  styles: [
+    `
+      .app-container {
+        max-width: 770px;
+        margin: 0 auto;
+      }
+    `,
+  ],
 })
 export class ResultComponent implements OnInit {
   errorMessage = '';
@@ -53,5 +81,9 @@ export class ResultComponent implements OnInit {
           this.searchResultData = undefined;
         }
       );
+  }
+
+  handleNextPage($event) {
+    console.log($event);
   }
 }
