@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../../search/search.service';
+import { Component, OnInit } from '@angular/core'; 
 import { Router } from '@angular/router';
+import {  GoogleAuthService, IAuth } from '../../auth/google-auth.service';
 
 @Component({
   selector: 'app-header',
@@ -21,12 +21,19 @@ import { Router } from '@angular/router';
             <i class="search icon link" (click)="handleSearch()"></i>
           </div>
           <div>
-            <button
+            <button *ngIf="auth && auth.signedIn === false"
               class="ui button primary"
               style="margin-left: 1rem; width: 110px;"
+              (click)="handleSignIn()"
             >
               <i class="sign in alternate icon"></i>
               Sign in
+            </button>
+            <img *ngIf=" auth && auth.signedIn === true" 
+              [src]="auth.user.picture"
+            />
+            <button *ngIf="auth && auth.signedIn === true"(click)="handleSignOut()" >
+              Sign out
             </button>
           </div>
         </div>
@@ -37,13 +44,33 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   searchKeyWord = '';
-  constructor(private searchService: SearchService, private router: Router) {}
+  signedIn: boolean;
+  user: any;
+  auth: IAuth;
 
-  ngOnInit(): void {}
+  constructor( private router: Router, private googleAuthService: GoogleAuthService) {}
+
+  ngOnInit(): void {
+    console.log(this.googleAuthService.signedIn);
+    this.signedIn = this.googleAuthService.signedIn;
+    this.user = this.googleAuthService.user;
+    this.googleAuthService.authInput.subscribe((data: IAuth) => {
+      this.auth = data;
+      console.log(this.auth)
+    })
+  }
 
   handleSearch() {
     if (this.searchKeyWord.trim() === '') return;
     this.router.navigateByUrl(`/search/${this.searchKeyWord.trim()}`);
     this.searchKeyWord = '';
+  }
+
+  handleSignIn() {
+    this.googleAuthService.googleSignIn(); 
+  }
+
+  handleSignOut() {
+    this.googleAuthService.googleSignOut(); 
   }
 }

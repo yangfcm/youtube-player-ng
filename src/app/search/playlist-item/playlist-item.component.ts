@@ -11,7 +11,11 @@ import { ISearchResultItem } from '../interfaces/searchResultItem';
         [routerLink]="'/plalist/' + playlist.id.playlistId"
       >
         <img [src]="playlist.snippet.thumbnails.medium.url" />
-        <div class="app-image-cover">Play List</div>
+        <div class="app-image-cover">
+          <p>
+          <i class="list icon"></i>  
+        Play List</p></div>
+          
       </a>
       <div class="content ">
         <a
@@ -45,6 +49,9 @@ import { ISearchResultItem } from '../interfaces/searchResultItem';
         z-index: 10;
         background: rgba(0, 0, 0, 0.4);
         top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     `,
   ],
