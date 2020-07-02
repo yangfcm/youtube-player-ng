@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { VideoModule } from './video/video.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component'; 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, DropdownComponent],
   imports: [
     BrowserModule,
     FormsModule,

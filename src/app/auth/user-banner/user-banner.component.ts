@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import {  GoogleAuthService, IAuth } from '../../auth/google-auth.service';
 
 @Component({
   selector: 'app-user-banner',
   template: `
     <div class="app-banner-container">
-      <div class="app-banner-image">
-        <img
-          class="ui tiny image circular"
-          src="https://lh3.googleusercontent.com/a-/AOh14GgHZ_IO2RUfg770gLs9V6UOsJaDMsWmGKP4AUna"
-        />
-      </div>
-      <div class="app-banner-title">
-        <h2 class="ui header app-banner-title-text">
-          <span style="margin-right: 3px;">Welcome,</span> <span>Fan Yang</span>
-        </h2>
-      </div>
+      <ng-container *ngIf="auth">
+        <div class="app-banner-image">
+          <img *ngIf="auth.signedIn"
+            class="ui tiny image circular"
+            [src]=" auth.user.picture"
+          />
+          <i *ngIf="!auth.signedIn" class="user secret icon huge"  ></i>
+        </div>
+        <div class="app-banner-title">
+          <h2 class="ui header app-banner-title-text">
+            <span style="margin-right: 3px;">Welcome</span> <span *ngIf="auth.user">, 
+            {{ auth.user.name }}</span>
+          </h2>
+        </div>
+      </ng-container>      
     </div>
   `,
   styles: [
@@ -22,10 +27,13 @@ import { Component, OnInit } from '@angular/core';
       .app-banner-container {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
-        display: flex;
+        display: flex;  
       }
       .app-banner-image {
-        margin-right: 2rem;
+        margin-right: 1rem;
+        min-height: 80px;
+        display: flex;  
+        align-items: center;
       }
       .app-banner-title {
         display: flex !important;
@@ -43,7 +51,20 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class UserBannerComponent implements OnInit {
-  constructor() {}
+  
+  auth: IAuth  
+  constructor(private googleAuthService: GoogleAuthService,
+    private ngZone: NgZone) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { 
+    this.auth = this.googleAuthService.googleAuth;
+    this.googleAuthService.authEmitter.subscribe((data) => {       
+      this.ngZone.run(() => {
+        this.auth = data;  
+      })
+    }, (err) => {
+      console.log(err.message);
+      this.auth = undefined;
+    }); 
+  }
 }

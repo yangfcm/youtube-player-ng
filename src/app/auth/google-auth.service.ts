@@ -24,6 +24,7 @@ export class GoogleAuthService {
 
   authEmitter = new Subject<IAuth>(); 
   auth: any;
+  googleAuth: IAuth;
   signedIn: boolean;
 
   constructor(private http: HttpClient) {
@@ -53,26 +54,29 @@ export class GoogleAuthService {
           Authorization: accessToken,
         },
       }).subscribe((data: IAuthUser) => { 
-        this.authEmitter.next({
+        this.googleAuth = {
           signedIn: true,
           user: data
-        });
+        }
+        this.authEmitter.next(this.googleAuth);
         this.signedIn = true;
       }, (err) => {
         console.log(err.message);
         localStorage.removeItem('access_token');
-        this.authEmitter.next({
+        this.googleAuth = {
           signedIn: false,
           user: undefined
-        });
+        };
+        this.authEmitter.next(this.googleAuth);
       })
      } else { 
        // sign out
-        localStorage.removeItem('access_token'); 
-        this.authEmitter.next({
+        localStorage.removeItem('access_token');
+        this.googleAuth = {
           signedIn: false,
           user: undefined
-        });
+        };
+        this.authEmitter.next(this.googleAuth);
      }
    }
 
