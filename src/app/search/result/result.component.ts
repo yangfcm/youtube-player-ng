@@ -73,8 +73,7 @@ export class ResultComponent implements OnInit {
       .subscribe(
         (data) => {
           this.errorMessage = '';
-          this.searchResultData = data;
-          console.log(data);
+          this.searchResultData = data; 
         },
         (err) => {
           this.errorMessage = err;
@@ -84,6 +83,27 @@ export class ResultComponent implements OnInit {
   }
 
   handleNextPage($event) {
-    console.log($event);
+    if(this.isLoadingNextPage) return;
+    this.isLoadingNextPage = true;
+    this.searchService.searchVideos({
+      q: this.searchKeyWord
+    }, $event).subscribe(
+      data => {
+        this.searchResultData = {
+          ...this.searchResultData,
+          items: this.searchResultData.items.concat(data.items),
+          nextPageToken: data.nextPageToken,
+          pageInfo: data.pageInfo
+        }
+        this.errorMessage = '';
+      },
+      err => {
+        this.errorMessage = err;
+        this.searchResultData = undefined;
+      },
+      () => {
+        this.isLoadingNextPage = false;
+      }
+    ) 
   }
 }
