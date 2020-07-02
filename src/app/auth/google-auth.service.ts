@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs'; 
 import { environment } from '../../environments/environment';
 
 interface IAuthUser {
@@ -22,12 +22,9 @@ export interface IAuth {
 })
 export class GoogleAuthService {
 
-  authInput = new Subject<IAuth>();
-  authOutput: Observable<IAuth>
-
-  signedIn: boolean;
-  user: IAuthUser; 
+  authEmitter = new Subject<IAuth>(); 
   auth: any;
+  signedIn: boolean;
 
   constructor(private http: HttpClient) {
     if(!(window as any).gapi) return;
@@ -45,26 +42,34 @@ export class GoogleAuthService {
 
    onAuthChange = (isSignedIn) => {
      if(isSignedIn) {
+       // Sign in
        const googleAuthUser = this.auth.currentUser.get();
+       // Get and save auth token
        const accessToken = `${googleAuthUser.wc.token_type} ${googleAuthUser.wc.access_token}`;
-       localStorage.setItem('access_token', accessToken);
+       localStorage.setItem('access_token', accessToken); 
        this.http.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
        {
         headers: {
           Authorization: accessToken,
         },
       }).subscribe((data: IAuthUser) => { 
-        this.authInput.next({
+        this.authEmitter.next({
           signedIn: true,
           user: data
-        }); 
-      },
-      (err) => {
-        console.log(err);
+        });
+        this.signedIn = true;
+      }, (err) => {
+        console.log(err.message);
+        localStorage.removeItem('access_token');
+        this.authEmitter.next({
+          signedIn: false,
+          user: undefined
+        });
       })
      } else { 
-        localStorage.removeItem('access_token');
-        this.authInput.next({
+       // sign out
+        localStorage.removeItem('access_token'); 
+        this.authEmitter.next({
           signedIn: false,
           user: undefined
         });
@@ -78,6 +83,4 @@ export class GoogleAuthService {
    googleSignOut() {
      this.auth.signOut();
    }
-
-
 }
