@@ -15,11 +15,11 @@ import {  GoogleAuthService, IAuth } from '../../auth/google-auth.service';
         </div>
         <div class="app-banner-title">
           <h2 class="ui header app-banner-title-text">
-            <span style="margin-right: 3px;">Welcome</span> <span *ngIf="auth.user">, 
-            {{ auth.user.name }}</span>
+            <span style="margin-right: 3px;">Welcome<span *ngIf="auth.user"> back,</span> </span> 
+            <span *ngIf="auth.user">{{ auth.user.name }}</span>
           </h2>
         </div>
-      </ng-container>      
+      </ng-container>     
     </div>
   `,
   styles: [

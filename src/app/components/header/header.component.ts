@@ -30,26 +30,38 @@ import { Subscription } from 'rxjs';
               <i class="sign in alternate icon"></i>
               Sign in
             </button>
-            <img *ngIf="auth.signedIn === true" 
-              [src]="auth.user.picture"
-              class="ui tiny image circular"
-            />
-            <button *ngIf=" auth.signedIn === true"(click)="handleSignOut()" 
-              class="ui button negative basic"
-            >
-              Sign out
-            </button>
+            <div *ngIf="auth.signedIn === true" class="app-dropdown-container">
+              <img 
+                [src]="auth.user.picture"
+                class="ui tiny image circular" 
+                (click)="toggleShowDropdown($event)"
+                style="cursor: pointer; max-height: 60px; width: auto;"
+              />
+              <app-dropdown class="app-dropdown-menu" *ngIf="showDropdown"></app-dropdown> 
+            </div>         
           </div>  
         </div>
       </div>
     </div>
   `,
-  styles: [``],
+  styles: [`
+    .app-dropdown-container {
+      position: relative;
+      margin-left: 1rem;
+    }
+    .app-dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 105%;
+      z-index: 10;
+    }
+  `],
 })
 export class HeaderComponent implements OnInit {
   searchKeyWord = ''; 
   auth$: Subscription;
-  auth: IAuth  
+  auth: IAuth;
+  showDropdown = false;
 
   constructor( private router: Router, private googleAuthService: GoogleAuthService,
     private ngZone: NgZone) { 
@@ -66,6 +78,9 @@ export class HeaderComponent implements OnInit {
       console.log(err.message);
       this.auth = undefined;
     }); 
+    window.addEventListener("click", () => {
+      this.showDropdown = false;
+    });
   }
  
   handleSearch() {
@@ -78,7 +93,10 @@ export class HeaderComponent implements OnInit {
     this.googleAuthService.googleSignIn(); 
   }
 
-  handleSignOut() {
-    this.googleAuthService.googleSignOut(); 
+  toggleShowDropdown($event) {
+    this.showDropdown = !this.showDropdown;
+    $event.stopPropagation();
   }
+  
+
 }
