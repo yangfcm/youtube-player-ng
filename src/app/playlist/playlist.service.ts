@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
 import { environment } from '../../environments/environment';
+import { IPlaylistData } from './interfaces/playlistData';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class PlaylistService {
   fetchMyPlaylist(pageToken = '') {
     const accessToken = localStorage.getItem('access_token');
     return this.http
-      .get<any>(`${this.apiUrl}/playlists`, {
+      .get<IPlaylistData>(`${this.apiUrl}/playlists`, {
         headers: {
           Authorization: accessToken,
         },
@@ -42,7 +43,7 @@ export class PlaylistService {
   /** Fetch the playlist under a particular channel */
   fetchPlaylist(channelId: string, pageToken = '') {
     return this.http
-      .get<any>(`${this.apiUrl}/playlists`, {
+      .get<IPlaylistData>(`${this.apiUrl}/playlists`, {
         params: {
           key: environment.apiKey,
           part: 'snippet,contentDetails,status',

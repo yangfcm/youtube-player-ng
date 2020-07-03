@@ -1,22 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoModule } from './video/video.module';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component'; 
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, DropdownComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    SharedModule,
     VideoModule,
   ],
   providers: [],

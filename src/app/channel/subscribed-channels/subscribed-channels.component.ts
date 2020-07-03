@@ -14,7 +14,10 @@ import { IChannelData } from '../interfaces/channelData';
       <app-error-message *ngIf="errorMessage"
         >{{ errorMessage }}
       </app-error-message>
-      <ng-container *ngIf="subscriptionData && !errorMessage">
+      <ng-container *ngIf="subscriptionData && !errorMessage"
+        ><app-error-message *ngIf="subscriptionData.items.length === 0">
+          You have not subscribed any channel.
+        </app-error-message>
         <div class="app-subscribed-channel-container">
           <app-subscribed-channel-item
             *ngFor="let channel of subscriptionData.items"
@@ -68,6 +71,7 @@ export class SubscribedChannelsComponent implements OnInit {
       (data) => {
         this.ngZone.run(() => {
           this.auth = data;
+          this.fetchSubscription();
         });
       },
       (err) => {
@@ -79,9 +83,15 @@ export class SubscribedChannelsComponent implements OnInit {
       }
     );
 
+    if (this.auth && this.auth.signedIn) {
+      this.fetchSubscription();
+    }
+  }
+
+  fetchSubscription() {
+    this.errorMessage = '';
     this.channelService.fetchSubscriptions().subscribe(
       (data) => {
-        console.log(data);
         this.errorMessage = '';
         this.subscriptionData = data;
       },

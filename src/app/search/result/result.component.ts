@@ -7,7 +7,7 @@ import { ISearchResultData } from '../interfaces/searchResultData';
 @Component({
   selector: 'app-result',
   template: `
-    <div class="ui divider hidden"></div>
+    <app-margin></app-margin>
     <app-loader *ngIf="!errorMessage && !searchResultData"></app-loader>
     <app-error-message *ngIf="errorMessage && !searchResultData">{{
       errorMessage
@@ -22,7 +22,7 @@ import { ISearchResultData } from '../interfaces/searchResultData';
           *ngFor="let item of searchResultData.items"
           [item]="item"
         ></app-result-item>
-        <div class="ui divider hidden"></div>
+        <app-margin></app-margin>
         <div
           class="ui two column centered grid"
           *ngIf="searchResultData.nextPageToken"

@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from '../channel/home/home.component';
 import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
+import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyPlaylistComponent,
-    children: [],
+    component: HomeComponent,
+    children: [
+      {
+        path: ':id',
+        component: PlaylistDetailComponent,
+      },
+      {
+        path: '',
+        component: MyPlaylistComponent,
+      },
+    ],
   },
 ];
 
