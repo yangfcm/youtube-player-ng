@@ -5,9 +5,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <app-channel-banner></app-channel-banner>
     <app-channel-nav></app-channel-nav>
-    <p>
-      channel-detail works!
-    </p>
+    <router-outlet></router-outlet>
   `,
   styles: [],
 })

@@ -10,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        <i class="thumbs up outline icon"></i> Videos
+        <i class="video icon"></i> Videos
       </a>
       <a class="item" routerLink="playlist" routerLinkActive="active"
         ><i class="list icon"></i> Playlist</a
       >
       <a class="item" routerLink="intro" routerLinkActive="active">
-        <i class="user plus icon"></i> Intro
+        <i class="info circle icon"></i> Intro
       </a>
     </div>
   `,
