@@ -7,14 +7,14 @@ import { IVideoData } from '../interfaces/videoData';
   template: `
     <app-user-banner></app-user-banner>
     <app-nav></app-nav>
-    <div class="ui divider hidden"></div>
+    <app-margin></app-margin>
     <app-loader *ngIf="!errorMessage && !videoData"></app-loader>
     <app-error-message *ngIf="errorMessage && !videoData">{{
       errorMessage
     }}</app-error-message>
     <ng-container *ngIf="videoData && !errorMessage">
       <app-video-grid [videos]="videoData.items"></app-video-grid>
-      <div class="ui divider hidden"></div>
+      <app-margin></app-margin>
       <div class="ui two column centered grid">
         <div class="column">
           <app-more-button

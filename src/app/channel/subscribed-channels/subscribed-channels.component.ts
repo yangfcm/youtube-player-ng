@@ -1,18 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
 
 @Component({
   selector: 'app-subscribed-channels',
   template: `
     <app-user-banner></app-user-banner>
     <app-nav></app-nav>
-    <p>
+    <app-margin></app-margin>
+    <app-loader *ngIf="!auth"></app-loader>
+    <p *ngIf="auth && auth.signedIn">
       subscribed-channels works!
     </p>
+    <ng-container *ngIf="auth && auth.signedIn === false">
+      <app-require-signin></app-require-signin>
+    </ng-container>
   `,
   styles: [],
 })
 export class SubscribedChannelsComponent implements OnInit {
-  constructor() {}
+  auth: IAuth;
+  constructor(
+    private googleAuthService: GoogleAuthService,
+    private ngZone: NgZone
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth = this.googleAuthService.googleAuth;
+    this.googleAuthService.authEmitter.subscribe(
+      (data) => {
+        this.ngZone.run(() => {
+          this.auth = data;
+        });
+      },
+      (err) => {
+        console.log(err.message);
+        this.auth = {
+          signedIn: false,
+          user: undefined,
+        };
+      }
+    );
+  }
 }
