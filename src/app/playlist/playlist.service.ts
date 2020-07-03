@@ -18,9 +18,10 @@ export class PlaylistService {
     return this.http
       .get<any>(`${this.apiUrl}/playlists`, {
         headers: {
-          Authorizations: accessToken,
+          Authorization: accessToken,
         },
         params: {
+          key: environment.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,
@@ -43,6 +44,7 @@ export class PlaylistService {
     return this.http
       .get<any>(`${this.apiUrl}/playlists`, {
         params: {
+          key: environment.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,
@@ -65,6 +67,7 @@ export class PlaylistService {
     return this.http
       .get<any>(`${this.apiUrl}/playlistItems`, {
         params: {
+          key: environment.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,

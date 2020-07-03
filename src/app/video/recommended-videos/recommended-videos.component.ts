@@ -9,13 +9,13 @@ import { IVideoData } from '../interfaces/videoData';
     <app-nav></app-nav>
     <app-margin></app-margin>
     <app-loader *ngIf="!errorMessage && !videoData"></app-loader>
-    <app-error-message *ngIf="errorMessage && !videoData">{{
+    <app-error-message *ngIf="errorMessage">{{
       errorMessage
     }}</app-error-message>
     <ng-container *ngIf="videoData && !errorMessage">
       <app-video-grid [videos]="videoData.items"></app-video-grid>
       <app-margin></app-margin>
-      <div class="ui two column centered grid">
+      <div class="ui two column centered grid" *ngIf="videoData.nextPageToken">
         <div class="column">
           <app-more-button
             [nextPageToken]="videoData.nextPageToken"
@@ -37,7 +37,6 @@ export class RecommendedVideosComponent implements OnInit {
   ngOnInit(): void {
     this.videoService.fetchVideos({ chart: 'mostPopular' }, '').subscribe(
       (data) => {
-        console.log('success ', data);
         this.errorMessage = '';
         this.videoData = data;
       },

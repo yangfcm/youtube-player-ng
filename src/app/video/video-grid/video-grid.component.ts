@@ -25,7 +25,5 @@ export class VideoGridComponent implements OnInit {
   @Input() videos: IVideoItem[];
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.videos);
-  }
+  ngOnInit(): void {}
 }

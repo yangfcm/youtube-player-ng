@@ -23,7 +23,10 @@ import { ISearchResultData } from '../interfaces/searchResultData';
           [item]="item"
         ></app-result-item>
         <div class="ui divider hidden"></div>
-        <div class="ui two column centered grid">
+        <div
+          class="ui two column centered grid"
+          *ngIf="searchResultData.nextPageToken"
+        >
           <div class="column">
             <app-more-button
               [nextPageToken]="searchResultData.nextPageToken"
@@ -73,7 +76,7 @@ export class ResultComponent implements OnInit {
       .subscribe(
         (data) => {
           this.errorMessage = '';
-          this.searchResultData = data; 
+          this.searchResultData = data;
         },
         (err) => {
           this.errorMessage = err;
@@ -83,27 +86,32 @@ export class ResultComponent implements OnInit {
   }
 
   handleNextPage($event) {
-    if(this.isLoadingNextPage) return;
+    if (this.isLoadingNextPage) return;
     this.isLoadingNextPage = true;
-    this.searchService.searchVideos({
-      q: this.searchKeyWord
-    }, $event).subscribe(
-      data => {
-        this.searchResultData = {
-          ...this.searchResultData,
-          items: this.searchResultData.items.concat(data.items),
-          nextPageToken: data.nextPageToken,
-          pageInfo: data.pageInfo
+    this.searchService
+      .searchVideos(
+        {
+          q: this.searchKeyWord,
+        },
+        $event
+      )
+      .subscribe(
+        (data) => {
+          this.searchResultData = {
+            ...this.searchResultData,
+            items: this.searchResultData.items.concat(data.items),
+            nextPageToken: data.nextPageToken,
+            pageInfo: data.pageInfo,
+          };
+          this.errorMessage = '';
+        },
+        (err) => {
+          this.errorMessage = err;
+          this.searchResultData = undefined;
+        },
+        () => {
+          this.isLoadingNextPage = false;
         }
-        this.errorMessage = '';
-      },
-      err => {
-        this.errorMessage = err;
-        this.searchResultData = undefined;
-      },
-      () => {
-        this.isLoadingNextPage = false;
-      }
-    ) 
+      );
   }
 }
