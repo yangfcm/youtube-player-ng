@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IChannelIntro } from '../interfaces/channelIntro';
-import { ChannelService } from '../channel.service';
 
 @Component({
   selector: 'app-channel-intro',
   template: `
     <div class="ui segments">
       <div class="ui segment">
-        <p>title</p>
+        <p>{{ channelIntro.snippet.publishedAt.toString() }}</p>
       </div>
       <div class="ui segment">
-        <p>Middle</p>
+        <p>{{ channelIntro.snippet.description }}</p>
       </div>
       <div class="ui segment">
-        <p>Middle</p>
+        <p>{{ channelIntro.statistics.subscriberCount }} subscribers</p>
+      </div>
+      <div class="ui segment">
+        <p>{{ channelIntro.statistics.viewCount }} views</p>
       </div>
     </div>
   `,
@@ -24,24 +26,12 @@ export class ChannelIntroComponent implements OnInit {
   channelIntro: IChannelIntro;
   channelId: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private channelService: ChannelService
-  ) {}
-
-  ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   this.channelId = params.id;
-    // });
-    // this.channelService.fetchChannelIntro(this.channelId).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.channelIntro = data;
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //     this.channelIntro = undefined;
-    //   }
-    // );
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe((data) => {
+      console.log(data.channelIntro.snippet.publishedAt.toString());
+      this.channelIntro = data.channelIntro;
+    });
   }
+
+  ngOnInit(): void {}
 }

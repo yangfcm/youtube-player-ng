@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ChannelVideosComponent } from './channel-videos/channel-videos.component';
 import { ChannelPlaylistComponent } from './channel-playlist/channel-playlist.component';
 import { ChannelIntroComponent } from './channel-intro/channel-intro.component';
+import { ChannelResolverService } from './channel-resolver.service';
 
 const routes: Routes = [
   {
@@ -27,6 +28,9 @@ const routes: Routes = [
           {
             path: 'intro',
             component: ChannelIntroComponent,
+            resolve: {
+              channelIntro: ChannelResolverService,
+            },
           },
           {
             path: '',

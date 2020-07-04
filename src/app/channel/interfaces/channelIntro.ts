@@ -5,7 +5,7 @@ export interface IChannelIntro {
     title: string;
     country: string;
     description: string;
-    punishedAt: string;
+    publishedAt: string;
     thumbnails: {
       default: { url: string };
       medium: { url: string };
