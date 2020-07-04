@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {  GoogleAuthService, IAuth } from '../../auth/google-auth.service';
+import { GoogleAuthService } from '../../auth/google-auth.service';
 
 @Component({
   selector: 'app-dropdown',
   template: `
     <div class="ui vertical menu">
-      <a class="item" routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }">
+      <a class="item" routerLink="/">
         Recommend
       </a>
-      <a class="item" routerLink="/channel" routerLinkActive="active">
+      <a class="item" routerLink="/channel">
         Subscriptions
       </a>
-      <a class="item" routerLink="/playlist" routerLinkActive="active">
+      <a class="item" routerLink="/playlist">
         Play list
       </a>
       <a class="item" (click)="handleSignOut()">
@@ -21,17 +19,13 @@ import {  GoogleAuthService, IAuth } from '../../auth/google-auth.service';
       </a>
     </div>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class DropdownComponent implements OnInit {
+  constructor(private googleAuthService: GoogleAuthService) {}
 
-  constructor(private googleAuthService: GoogleAuthService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   handleSignOut() {
-    this.googleAuthService.googleSignOut(); 
+    this.googleAuthService.googleSignOut();
   }
-
 }
