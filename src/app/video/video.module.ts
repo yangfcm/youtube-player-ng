@@ -23,5 +23,6 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
     VideoDetailComponent,
   ],
   imports: [CommonModule, VideoRoutingModule, SharedModule, AuthModule],
+  exports: [VideoGridComponent],
 })
 export class VideoModule {}

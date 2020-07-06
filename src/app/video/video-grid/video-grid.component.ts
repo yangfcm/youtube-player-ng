@@ -4,7 +4,12 @@ import { IVideoItem } from '../interfaces/videoItem';
 @Component({
   selector: 'app-video-grid',
   template: `
-    <div class="app-video-grid">
+    <div class="ui segment basic" *ngIf="!videos || videos.length === 0">
+      <h3 class="ui center aligned header red">
+        No videos displayed
+      </h3>
+    </div>
+    <div class="app-video-grid" *ngIf="videos && videos.length > 0">
       <app-video-grid-item
         *ngFor="let video of videos"
         [video]="video"

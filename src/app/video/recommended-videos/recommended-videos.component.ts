@@ -13,6 +13,7 @@ import { IVideoData } from '../interfaces/videoData';
       errorMessage
     }}</app-error-message>
     <ng-container *ngIf="videoData && !errorMessage">
+      <app-page-title>Recommended Videos</app-page-title>
       <app-video-grid [videos]="videoData.items"></app-video-grid>
       <app-margin></app-margin>
       <div class="ui two column centered grid" *ngIf="videoData.nextPageToken">

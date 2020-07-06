@@ -12,6 +12,10 @@ export class VideoService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Get a set of videos based on filter,
+   * e.g. videos belonging to a channel or videos belonging to a play list etc.
+   */
   fetchVideos(filter: any, pageToken: string) {
     return this.http
       .get<IVideoData>(`${this.apiUrl}/videos`, {

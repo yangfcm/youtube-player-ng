@@ -15,6 +15,7 @@ import { IPlaylistData } from '../interfaces/playlistData';
         >{{ errorMessage }}
       </app-error-message>
       <ng-container *ngIf="!errorMessage && playlistData">
+        <app-page-title> My Playlist</app-page-title>
         <app-error-message *ngIf="playlistData.items.length === 0">
           No playlist created
         </app-error-message>

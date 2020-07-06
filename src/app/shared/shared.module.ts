@@ -11,6 +11,7 @@ import { MarginComponent } from './margin/margin.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { PageTitleComponent } from './page-title/page-title.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     DropdownComponent,
     HeaderComponent,
     FooterComponent,
+    PageTitleComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [
@@ -35,6 +37,7 @@ import { FooterComponent } from './footer/footer.component';
     DropdownComponent,
     HeaderComponent,
     FooterComponent,
+    PageTitleComponent,
   ],
 })
 export class SharedModule {}

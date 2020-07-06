@@ -20,10 +20,16 @@ const routes: Routes = [
           {
             path: 'videos',
             component: ChannelVideosComponent,
+            resolve: {
+              channelIntro: ChannelResolverService,
+            },
           },
           {
             path: 'playlist',
             component: ChannelPlaylistComponent,
+            resolve: {
+              channelIntro: ChannelResolverService,
+            },
           },
           {
             path: 'intro',

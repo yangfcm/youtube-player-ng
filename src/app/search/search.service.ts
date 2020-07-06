@@ -46,7 +46,7 @@ export class SearchService {
         params: {
           key: environment.apiKey,
           part: 'snippet',
-          maxResults: '10',
+          maxResults: '12',
           pageToken,
           ...filter,
         },

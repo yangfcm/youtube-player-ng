@@ -32,7 +32,6 @@ export class ChannelDetailComponent implements OnInit {
     });
     this.channelService.fetchChannelIntro(this.channelId).subscribe(
       (data) => {
-        console.log(data);
         this.channelIntro = data;
         this.errorMessage = '';
       },

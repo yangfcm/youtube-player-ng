@@ -24,10 +24,12 @@ import { IVideoItem } from '../interfaces/videoItem';
         </div>
       </div>
       <div class="extra content">
-        <span class="right floated">
+        <span>
+          <i class="calendar icon"></i>
           {{ video.snippet.publishedAt | date: 'd LLL, yyyy' }}
         </span>
-        <span>
+        <span *ngIf="video.statistics" class="right floated">
+          <i class="eye icon"></i>
           {{ video.statistics.viewCount | number }}
         </span>
       </div>

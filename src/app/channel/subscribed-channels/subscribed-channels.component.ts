@@ -14,8 +14,9 @@ import { IChannelData } from '../interfaces/channelData';
       <app-error-message *ngIf="errorMessage"
         >{{ errorMessage }}
       </app-error-message>
-      <ng-container *ngIf="subscriptionData && !errorMessage"
-        ><app-error-message *ngIf="subscriptionData.items.length === 0">
+      <ng-container *ngIf="subscriptionData && !errorMessage">
+        <app-page-title>My Subscriptions</app-page-title>
+        <app-error-message *ngIf="subscriptionData.items.length === 0">
           You have not subscribed any channel.
         </app-error-message>
         <div class="app-subscribed-channel-container">

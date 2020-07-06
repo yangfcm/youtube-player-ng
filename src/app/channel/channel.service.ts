@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, pluck, map } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
+import { SearchService } from '../search/search.service';
+import { PlaylistService } from '../playlist/playlist.service';
 import { environment } from '../../environments/environment';
 import { IChannelData } from './interfaces/channelData';
 import { IChannelIntro } from './interfaces/channelIntro';
@@ -13,7 +15,12 @@ export class ChannelService {
   apiUrl = environment.apiUrl;
   accessToken: string;
 
-  constructor(private http: HttpClient, private errorService: ErrorService) {
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private searchService: SearchService,
+    private playlistService: PlaylistService
+  ) {
     this.accessToken = localStorage.getItem('access_token');
   }
 
@@ -84,4 +91,17 @@ export class ChannelService {
 
   /** Unsubscribe a channel */
   unsubscribeChannel(channelId) {}
+
+  /** Get videos under a channel */
+  fetchChannelVideos(channelId: string, pageToken = '') {
+    return this.searchService.searchVideos(
+      { channelId, order: 'date' },
+      pageToken
+    );
+  }
+
+  /** Get playlist under a channel */
+  fetchChannelPlaylist(channelId: string, pageToken = '') {
+    return this.playlistService.fetchPlaylist(channelId, pageToken);
+  }
 }

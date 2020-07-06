@@ -41,16 +41,15 @@ export class ChannelIntroComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {
-      console.log(data.channelIntro.snippet.publishedAt.toString());
+      // console.log(data.channelIntro.snippet.publishedAt.toString());
       this.channelIntro = data.channelIntro;
     });
   }
 
   ngOnInit(): void {}
 
-  formatNumber(number: number): string {
-    let strNum = String(number);
-    let arrNum = strNum.split('');
+  formatNumber(number: string): string {
+    let arrNum = number.split('');
     let arr = [];
     let part = '';
     for (let i = 0; i < arrNum.length; i++) {
@@ -67,7 +66,7 @@ export class ChannelIntroComponent implements OnInit {
     return arr.join(',');
   }
 
-  formatDate(date: Date): string {
+  formatDate(date: string): string {
     const dDate = new Date(date);
     let month;
     switch (dDate.getMonth() + 1) {

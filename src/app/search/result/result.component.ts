@@ -18,10 +18,20 @@ import { ISearchResultData } from '../interfaces/searchResultData';
           Search result with keyword:
           <span class="ui header red">{{ searchKeyWord }}</span>
         </h2>
-        <app-result-item
-          *ngFor="let item of searchResultData.items"
-          [item]="item"
-        ></app-result-item>
+        <div
+          class="ui segment basic"
+          *ngIf="!searchResultData.items || searchResultData.items.length === 0"
+        >
+          <h3 class="ui center aligned header red">
+            There is no matched result
+          </h3>
+        </div>
+        <ng-container>
+          <app-result-item
+            *ngFor="let item of searchResultData.items"
+            [item]="item"
+          ></app-result-item
+        ></ng-container>
         <app-margin></app-margin>
         <div
           class="ui two column centered grid"
