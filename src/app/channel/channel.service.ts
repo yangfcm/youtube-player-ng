@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, EMPTY } from 'rxjs';
 import { catchError, pluck, map } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
 import { SearchService } from '../search/search.service';
@@ -7,6 +8,7 @@ import { PlaylistService } from '../playlist/playlist.service';
 import { environment } from '../../environments/environment';
 import { IChannelData } from './interfaces/channelData';
 import { IChannelIntro } from './interfaces/channelIntro';
+import { IfStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +54,7 @@ export class ChannelService {
   }
 
   /** Fetch channel intro */
-  fetchChannelIntro(channelId) {
+  fetchChannelIntro(channelId: string) {
     return this.http
       .get<IChannelIntro>(`${this.apiUrl}/channels`, {
         params: {
@@ -84,13 +86,68 @@ export class ChannelService {
    * Give a channel id, if it is subscribed by the authorized user,
    * return true, otherwise return false
    */
-  fetchChannelSubsctiption(channelId) {}
+  fetchChannelSubsctiption(channelId: string) {
+    return this.http
+      .get<any>(`${this.apiUrl}/subscriptions`, {
+        headers: {
+          Authorization: this.accessToken,
+        },
+        params: {
+          key: environment.apiKey,
+          part: 'snippet',
+          forChannelId: channelId,
+          mine: 'true',
+        },
+      })
+      .pipe(
+        pluck('items'),
+        map((items) => {
+          if (items && items[0]) {
+            return items[0].id;
+          } else {
+            return '';
+          }
+        }),
+        catchError(() => {
+          return EMPTY;
+        })
+      );
+  }
 
   /** Subscribe a channel */
-  subscribeChannel(channelId) {}
+  subscribeChannel(channelId: string) {
+    return this.http.post<any>(
+      `${this.apiUrl}/subscriptions`,
+      {
+        snippet: {
+          resourceId: {
+            kind: 'youtube#channel',
+            channelId,
+          },
+        },
+      },
+      {
+        headers: {
+          Authorization: this.accessToken,
+        },
+        params: {
+          part: 'snippet',
+        },
+      }
+    );
+  }
 
   /** Unsubscribe a channel */
-  unsubscribeChannel(channelId) {}
+  unsubscribeChannel(subscriptionId: string) {
+    return this.http.delete<any>(`${this.apiUrl}/subscriptions`, {
+      headers: {
+        Authorization: this.accessToken,
+      },
+      params: {
+        id: subscriptionId,
+      },
+    });
+  }
 
   /** Get videos under a channel */
   fetchChannelVideos(channelId: string, pageToken = '') {

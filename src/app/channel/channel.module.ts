@@ -13,6 +13,7 @@ import { SubscribedChannelItemComponent } from './subscribed-channel-item/subscr
 import { ChannelVideosComponent } from './channel-videos/channel-videos.component';
 import { ChannelPlaylistComponent } from './channel-playlist/channel-playlist.component';
 import { ChannelNavComponent } from './channel-nav/channel-nav.component';
+import { SubscribeButtonComponent } from './subscribe-button/subscribe-button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ChannelNavComponent } from './channel-nav/channel-nav.component';
     ChannelVideosComponent,
     ChannelPlaylistComponent,
     ChannelNavComponent,
+    SubscribeButtonComponent,
   ],
   imports: [
     CommonModule,

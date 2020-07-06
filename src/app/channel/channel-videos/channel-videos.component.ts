@@ -46,7 +46,6 @@ export class ChannelVideosComponent implements OnInit {
         (data) => {
           this.errorMessage = '';
           this.videoData = data;
-          console.log(this.videoData);
         },
         (err) => {
           this.errorMessage = err;

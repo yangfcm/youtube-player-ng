@@ -49,7 +49,6 @@ export class ChannelPlaylistComponent implements OnInit {
         (data) => {
           this.errorMessage = '';
           this.playlistData = data;
-          console.log(this.playlistData);
         },
         (err) => {
           this.errorMessage = err;

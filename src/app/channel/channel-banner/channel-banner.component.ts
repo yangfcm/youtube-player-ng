@@ -5,16 +5,23 @@ import { IChannelIntro } from '../interfaces/channelIntro';
   selector: 'app-channel-banner',
   template: `
     <div class="app-banner-container" *ngIf="channelIntro">
-      <div class="app-banner-image">
-        <img
-          class="ui tiny image circular"
-          [src]="channelIntro.snippet.thumbnails.medium.url"
-        />
+      <div class="app-banner-title-container">
+        <div class="app-banner-image">
+          <img
+            class="ui tiny image circular"
+            [src]="channelIntro.snippet.thumbnails.medium.url"
+          />
+        </div>
+        <div class="app-banner-title">
+          <h2 class="ui header app-banner-title-text">
+            {{ channelIntro.snippet.title }}
+          </h2>
+        </div>
       </div>
-      <div class="app-banner-title">
-        <h2 class="ui header app-banner-title-text">
-          {{ channelIntro.snippet.title }}
-        </h2>
+      <div>
+        <app-subscribe-button
+          [channelId]="channelIntro.id"
+        ></app-subscribe-button>
       </div>
     </div>
   `,
@@ -23,6 +30,11 @@ import { IChannelIntro } from '../interfaces/channelIntro';
       .app-banner-container {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .app-banner-title-container {
         display: flex;
       }
       .app-banner-image {
