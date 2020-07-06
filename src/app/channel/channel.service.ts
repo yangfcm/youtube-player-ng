@@ -8,7 +8,6 @@ import { PlaylistService } from '../playlist/playlist.service';
 import { environment } from '../../environments/environment';
 import { IChannelData } from './interfaces/channelData';
 import { IChannelIntro } from './interfaces/channelIntro';
-import { IfStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +74,7 @@ export class ChannelService {
         catchError((err) => {
           const errorMessage = this.errorService.createErrorMessage(
             err,
-            environment.errorMessage.failedToFetchSubscription
+            environment.errorMessage.failedToFetchChannel
           );
           throw errorMessage;
         })

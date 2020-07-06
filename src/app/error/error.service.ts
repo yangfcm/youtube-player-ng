@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,9 @@ export class ErrorService {
    */
   createErrorMessage(err: any, custMessage: string) {
     let errorMessage: string;
-    if (err.error && err.error.error && err.error.error.message) {
+    if (err === environment.errorMessage.noChannelFound) {
+      errorMessage = environment.errorMessage.noChannelFound;
+    } else if (err.error && err.error.error && err.error.error.message) {
       errorMessage = err.error.error.message;
     } else if (custMessage) {
       errorMessage = custMessage;

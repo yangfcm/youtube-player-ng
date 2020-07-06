@@ -15,8 +15,10 @@ export const environment = {
     failedToFetchVideo: 'Failed to fetch video',
     failedToSearch: 'Failed to search resources',
     failedToFetchSubscription: 'Failed to fetch your subscribed channels',
+    failedToFetchChannel: 'Failed to fetch channel',
     failedToFetchPlaylist: 'Failed to fetch playlist',
     failedToFetchPlaylistDetail: 'Failed to fetch videos in the playlist',
+    noChannelFound: 'No channel found.',
   },
 };
 

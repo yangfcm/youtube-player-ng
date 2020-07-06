@@ -37,7 +37,7 @@ export class ChannelDetailComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-        this.router.navigateByUrl('/not-found');
+        // this.router.navigateByUrl('/not-found');
         this.channelIntro = undefined;
         this.errorMessage = err;
       }
