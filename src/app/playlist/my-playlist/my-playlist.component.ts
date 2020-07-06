@@ -16,15 +16,10 @@ import { IPlaylistData } from '../interfaces/playlistData';
       </app-error-message>
       <ng-container *ngIf="!errorMessage && playlistData">
         <app-page-title> My Playlist</app-page-title>
-        <app-error-message *ngIf="playlistData.items.length === 0">
+        <!-- <app-error-message *ngIf="playlistData.items.length === 0">
           No playlist created
-        </app-error-message>
-        <div class="app-subscribed-channel-container">
-          <app-playlist-item
-            *ngFor="let playlist of playlistData.items"
-            [playlist]="playlist"
-          ></app-playlist-item>
-        </div>
+        </app-error-message> -->
+        <app-playlist-list [playlists]="playlistData.items"></app-playlist-list>
         <app-margin></app-margin>
         <div
           class="ui two column centered grid"
@@ -44,15 +39,7 @@ import { IPlaylistData } from '../interfaces/playlistData';
       <app-require-signin></app-require-signin>
     </ng-container>
   `,
-  styles: [
-    `
-      .app-subscribed-channel-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-        gap: 0.5rem;
-      }
-    `,
-  ],
+  styles: [],
 })
 export class MyPlaylistComponent implements OnInit {
   auth: IAuth;

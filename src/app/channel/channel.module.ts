@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { ChannelBannerComponent } from './channel-banner/channel-banner.component';
 import { SubscribedChannelItemComponent } from './subscribed-channel-item/subscribed-channel-item.component';
 import { ChannelVideosComponent } from './channel-videos/channel-videos.component';
+import { ChannelPlaylistComponent } from './channel-playlist/channel-playlist.component';
 import { ChannelNavComponent } from './channel-nav/channel-nav.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ChannelNavComponent } from './channel-nav/channel-nav.component';
     ChannelBannerComponent,
     SubscribedChannelItemComponent,
     ChannelVideosComponent,
+    ChannelPlaylistComponent,
     ChannelNavComponent,
   ],
   imports: [

@@ -22,9 +22,9 @@ import { ISearchResultData } from '../interfaces/searchResultData';
           class="ui segment basic"
           *ngIf="!searchResultData.items || searchResultData.items.length === 0"
         >
-          <h3 class="ui center aligned header red">
+          <app-error-message>
             There is no matched result
-          </h3>
+          </app-error-message>
         </div>
         <ng-container>
           <app-result-item

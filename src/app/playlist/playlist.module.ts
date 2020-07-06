@@ -7,9 +7,17 @@ import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
 import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
 import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
 import { HomeComponent } from './home/home.component';
+import { PlaylistListComponent } from './playlist-list/playlist-list.component';
 
 @NgModule({
-  declarations: [MyPlaylistComponent, PlaylistItemComponent, PlaylistDetailComponent, HomeComponent],
+  declarations: [
+    MyPlaylistComponent,
+    PlaylistItemComponent,
+    PlaylistDetailComponent,
+    HomeComponent,
+    PlaylistListComponent,
+  ],
   imports: [CommonModule, PlaylistRoutingModule, SharedModule, AuthModule],
+  exports: [PlaylistListComponent],
 })
 export class PlaylistModule {}
