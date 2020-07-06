@@ -22,6 +22,9 @@ enum ButtonText {
       (mouseleave)="handleMouseLeave()"
       (click)="subscriptionId ? handleUnsubscribe() : handleSubscribe()"
       style="width: 120px;"
+      [disabled]="
+        buttonText === 'Subscribing' || buttonText === 'Unsubscribing'
+      "
     >
       {{ buttonText }}
     </button>
@@ -66,7 +69,6 @@ export class SubscribeButtonComponent implements OnInit {
       .fetchChannelSubsctiption(this.channelId)
       .subscribe((data: string) => {
         this.subscriptionId = data;
-        console.log(this.subscriptionId);
         if (this.subscriptionId) {
           this.buttonText = ButtonText.Subscribed;
         } else {

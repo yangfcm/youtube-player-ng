@@ -22,7 +22,7 @@ import { IPlaylistData } from '../../playlist/interfaces/playlistData';
           <app-more-button
             [nextPageToken]="playlistData.nextPageToken"
             (onNextPage)="handleNextPage($event)"
-            >More videos...</app-more-button
+            >More playlist...</app-more-button
           >
         </div>
       </div>
