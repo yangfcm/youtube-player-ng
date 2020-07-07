@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ChannelService } from '../channel.service';
 import { IChannelIntro } from '../interfaces/channelIntro';
 
@@ -21,7 +21,6 @@ export class ChannelDetailComponent implements OnInit {
   errorMessage: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private channelService: ChannelService
   ) {}

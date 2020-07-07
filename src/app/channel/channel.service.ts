@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, EMPTY } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { catchError, pluck, map } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
 import { SearchService } from '../search/search.service';

@@ -11,6 +11,8 @@ import { VideoListComponent } from './video-list/video-list.component';
 import { VideoListItemComponent } from './video-list-item/video-list-item.component';
 import { HomeComponent } from './home/home.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
+import { VideoInfoComponent } from './video-info/video-info.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
     VideoListItemComponent,
     HomeComponent,
     VideoDetailComponent,
+    VideoPlayerComponent,
+    VideoInfoComponent,
   ],
   imports: [CommonModule, VideoRoutingModule, SharedModule, AuthModule],
   exports: [VideoGridComponent, VideoListComponent],
