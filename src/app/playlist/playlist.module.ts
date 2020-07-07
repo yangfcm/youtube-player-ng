@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
+import { VideoModule } from '../video/video.module';
 import { PlaylistRoutingModule } from './playlist-routing.module';
 import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
 import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
@@ -17,7 +18,13 @@ import { PlaylistListComponent } from './playlist-list/playlist-list.component';
     HomeComponent,
     PlaylistListComponent,
   ],
-  imports: [CommonModule, PlaylistRoutingModule, SharedModule, AuthModule],
+  imports: [
+    CommonModule,
+    PlaylistRoutingModule,
+    SharedModule,
+    AuthModule,
+    VideoModule,
+  ],
   exports: [PlaylistListComponent],
 })
 export class PlaylistModule {}

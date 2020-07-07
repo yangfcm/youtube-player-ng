@@ -20,6 +20,11 @@ export interface IVideoItem {
       standard: IThumbnails;
     };
     title: string;
+    playlistId?: string;
+    resourceId?: {
+      kind: string;
+      videoId?: string;
+    };
   };
   statistics?: {
     commentCount: string;
@@ -27,5 +32,9 @@ export interface IVideoItem {
     favoriteCount: string;
     likeCount: string;
     viewCount: string;
+  };
+  contentDetails?: {
+    videoId: string;
+    videoPublishedAt: string;
   };
 }
