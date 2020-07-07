@@ -18,7 +18,8 @@ export const environment = {
     failedToFetchChannel: 'Failed to fetch channel',
     failedToFetchPlaylist: 'Failed to fetch playlist',
     failedToFetchPlaylistDetail: 'Failed to fetch videos in the playlist',
-    noChannelFound: 'No channel found.',
+    channelNotFound: 'No channel found.',
+    notFound: 'Page not found',
   },
 };
 

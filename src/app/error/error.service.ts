@@ -17,13 +17,22 @@ export class ErrorService {
    */
   createErrorMessage(err: any, custMessage: string) {
     let errorMessage: string;
-    if (err === environment.errorMessage.noChannelFound) {
-      errorMessage = environment.errorMessage.noChannelFound;
+    console.log(err);
+    if (
+      (err.error && err.error.error && err.error.error.code == 404) ||
+      err === environment.errorMessage.channelNotFound
+    ) {
+      // If error code returned from Google API is 404... or return 'no channel found.' message
+      // The error info returned from Google API is not always consistent.
+      errorMessage = environment.errorMessage.notFound;
     } else if (err.error && err.error.error && err.error.error.message) {
+      // If there is errorMessage (other than 404) returned from API
       errorMessage = err.error.error.message;
     } else if (custMessage) {
+      // If not, return customized message passed as an argument
       errorMessage = custMessage;
     } else {
+      // If not, only return default general error message.
       errorMessage = 'Operation failed';
     }
     return errorMessage;

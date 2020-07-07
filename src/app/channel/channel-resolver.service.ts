@@ -17,7 +17,7 @@ export class ChannelResolverService implements Resolve<IChannelIntro> {
     // You need to look up to parent property to get the id
     return this.channelService.fetchChannelIntro(channelId).pipe(
       catchError((err) => {
-        if (err === environment.errorMessage.noChannelFound) {
+        if (err === environment.errorMessage.notFound) {
           this.router.navigateByUrl('/not-found');
           return EMPTY;
         }
