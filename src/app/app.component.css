@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
 }
+.app-inner-container {
+  max-width: 90%;
+  margin: 0 auto;
+}
 .app-body {
   flex-grow: 1;
 }

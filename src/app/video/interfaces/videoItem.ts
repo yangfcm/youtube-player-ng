@@ -5,7 +5,12 @@ interface IThumbnails {
 }
 
 export interface IVideoItem {
-  id: string;
+  id:
+    | string
+    | {
+        kind: string;
+        videoId: string;
+      };
   kind: string;
   snippet: {
     channelId: string;

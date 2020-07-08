@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { VideoInfoComponent } from './video-info/video-info.component';
+import { SidebarVideosComponent } from './sidebar-videos/sidebar-videos.component';
+import { SearchModule } from '../search/search.module';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,15 @@ import { VideoInfoComponent } from './video-info/video-info.component';
     VideoDetailComponent,
     VideoPlayerComponent,
     VideoInfoComponent,
+    SidebarVideosComponent,
   ],
-  imports: [CommonModule, VideoRoutingModule, SharedModule, AuthModule],
+  imports: [
+    CommonModule,
+    VideoRoutingModule,
+    SharedModule,
+    AuthModule,
+    SearchModule,
+  ],
   exports: [VideoGridComponent, VideoListComponent],
 })
 export class VideoModule {}

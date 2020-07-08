@@ -20,7 +20,7 @@ import { IVideoItem } from '../interfaces/videoItem';
   styles: [
     `
       .app-list-container {
-        max-width: 750px;
+        max-width: 990px;
         margin: 0 auto;
       }
     `,

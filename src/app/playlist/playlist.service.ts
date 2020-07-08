@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
 import { environment } from '../../environments/environment';
 import { IPlaylistData } from './interfaces/playlistData';
+import { IVideoData } from '../video/interfaces/videoData';
 
 @Injectable({
   providedIn: 'root',
@@ -66,7 +67,7 @@ export class PlaylistService {
   /** Fetch the videos under a particular play list */
   fetchPlaylistDetails(playlistId: string, pageToken = '') {
     return this.http
-      .get<any>(`${this.apiUrl}/playlistItems`, {
+      .get<IVideoData>(`${this.apiUrl}/playlistItems`, {
         params: {
           key: environment.apiKey,
           part: 'snippet,contentDetails,status',

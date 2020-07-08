@@ -6,28 +6,22 @@ import { IVideoItem } from '../interfaces/videoItem';
   template: `
     <div class="ui card app-list-card">
       <a
-        class="image "
-        [routerLink]="
-          '/video/' +
-          video.snippet.resourceId.videoId +
-          '?playlistId=' +
-          video.snippet.playlistId
-        "
+        class=" app-card-image-container"
+        [routerLink]="['/video/' + videoId]"
+        [queryParams]="{ playlistId: video.snippet.playlistId }"
       >
         <img
           [src]="video.snippet.thumbnails.medium.url"
           class="app-list-card-image"
+          [title]="video.snippet.title"
         />
       </a>
       <div class="content app-list-card-content">
         <a
-          class="header"
-          [routerLink]="
-            '/video/' +
-            video.snippet.resourceId.videoId +
-            '?playlistId=' +
-            video.snippet.playlistId
-          "
+          class="header app-list-card-title"
+          [routerLink]="['/video/' + videoId]"
+          [queryParams]="{ playlistId: video.snippet.playlistId }"
+          [title]="video.snippet.title"
           >{{ video.snippet.title }}</a
         >
         <a [routerLink]="'/channel/' + video.snippet.channelId">
@@ -50,9 +44,19 @@ import { IVideoItem } from '../interfaces/videoItem';
         border: none;
         box-shadow: none;
       }
+      .app-card-image-container {
+        display: flex;
+        align-items: center;
+      }
       .app-list-card-image {
-        max-width: 150px;
+        max-width: 140px;
         height: auto;
+      }
+      .app-list-card-title {
+        line-height: 23px;
+        max-height: 46px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .app-list-card-content {
         flex-grow: 1;
@@ -63,6 +67,19 @@ import { IVideoItem } from '../interfaces/videoItem';
 })
 export class VideoListItemComponent implements OnInit {
   @Input() video: IVideoItem;
+
+  get videoId() {
+    let videoId = '';
+    if (this.video && this.video.snippet.resourceId) {
+      videoId = this.video.snippet.resourceId.videoId;
+    } else if (this.video && this.video.id) {
+      videoId = (this.video.id as {
+        kind: string;
+        videoId: string;
+      }).videoId;
+    }
+    return videoId;
+  }
   constructor() {}
 
   ngOnInit(): void {}

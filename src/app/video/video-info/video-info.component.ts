@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IVideoDetail } from '../interfaces/videoDetail';
 
 @Component({
   selector: 'app-video-info',
@@ -7,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
       video-info works!
     </p>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class VideoInfoComponent implements OnInit {
+  @Input() videoDetail: IVideoDetail;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { VideoModule } from './video/video.module';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SearchModule } from './search/search.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -20,6 +21,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     SharedModule,
     VideoModule,
+    SearchModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

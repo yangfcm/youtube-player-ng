@@ -51,7 +51,7 @@ import { ISearchResultData } from '../interfaces/searchResultData';
   styles: [
     `
       .app-container {
-        max-width: 770px;
+        max-width: 990px;
         margin: 0 auto;
       }
     `,

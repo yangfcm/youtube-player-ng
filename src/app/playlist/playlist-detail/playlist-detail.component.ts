@@ -48,7 +48,7 @@ export class PlaylistDetailComponent implements OnInit {
     });
 
     this.playlistService.fetchPlaylistDetails(this.playlistId).subscribe(
-      (data) => {
+      (data: IVideoData) => {
         console.log(data);
         this.playlistDetailData = data;
         this.errorMessage = '';

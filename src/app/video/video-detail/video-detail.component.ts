@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../video.service';
 import { PlaylistService } from '../../playlist/playlist.service';
+import { SearchService } from '../../search/search.service';
 import { IVideoDetail } from '../interfaces/videoDetail';
+import { IVideoData } from '../interfaces/videoData';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-video-detail',
@@ -14,11 +17,16 @@ import { IVideoDetail } from '../interfaces/videoDetail';
     </app-error-message>
     <ng-container *ngIf="!errorMessage && videoDetail"
       ><div class="ui grid stackable">
-        <div class="ten wide computer column">
+        <div class="sixteen wide tablet ten wide computer column">
           <app-video-player [videoId]="videoId"></app-video-player>
-          left
+          <app-video-info [videoDetail]="videoDetail"></app-video-info>
         </div>
-        <div class="six wide computer column">right</div>
+        <div class="sixteen wide tablet six wide computer column">
+          <app-sidebar-videos
+            [playlistId]="playlistId"
+            [videoId]="videoId"
+          ></app-sidebar-videos>
+        </div>
       </div>
     </ng-container>
   `,
@@ -33,7 +41,6 @@ export class VideoDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private playlistService: PlaylistService,
     private videoService: VideoService
   ) {}
 
@@ -44,6 +51,10 @@ export class VideoDetailComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.playlistId = params.playlistId;
     });
+    this.fetchVideoDetail();
+  }
+
+  fetchVideoDetail() {
     this.videoService.fetchVideo(this.videoId).subscribe(
       (data) => {
         console.log(data);

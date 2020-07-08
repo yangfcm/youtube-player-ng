@@ -19,5 +19,6 @@ import { ResultItemComponent } from './result-item/result-item.component';
     ResultItemComponent,
   ],
   imports: [CommonModule, SearchRoutingModule, SharedModule],
+  exports: [ResultItemComponent],
 })
 export class SearchModule {}
