@@ -5,7 +5,7 @@ import { IVideoItem } from '../interfaces/videoItem';
   selector: 'app-video-grid-item',
   template: `
     <div class="ui card" style="height: 100%; width: 100%;">
-      <a class="image" [routerLink]="'/video/' + video.id">
+      <a class="image" [routerLink]="'/video/' + videoId">
         <img
           [src]="video.snippet.thumbnails.medium.url"
           [title]="video.snippet.title"
@@ -13,7 +13,7 @@ import { IVideoItem } from '../interfaces/videoItem';
       </a>
       <div class="content">
         <div class="header app-video-title">
-          <a [routerLink]="'/video/' + video.id" [title]="video.snippet.title">
+          <a [routerLink]="'/video/' + videoId" [title]="video.snippet.title">
             {{ video.snippet.title }}</a
           >
         </div>
@@ -49,6 +49,12 @@ import { IVideoItem } from '../interfaces/videoItem';
 export class VideoGridItemComponent implements OnInit {
   @Input() video: IVideoItem;
   constructor() {}
+
+  get videoId() {
+    return typeof this.video.id === 'string'
+      ? this.video.id
+      : this.video.id.videoId;
+  }
 
   ngOnInit(): void {}
 }
