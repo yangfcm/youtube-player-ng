@@ -6,6 +6,6 @@ import { GoogleAuthComponent } from './google-auth/google-auth.component';
 @NgModule({
   declarations: [UserBannerComponent, GoogleAuthComponent],
   imports: [CommonModule],
-  exports: [UserBannerComponent],
+  exports: [UserBannerComponent, GoogleAuthComponent],
 })
 export class AuthModule {}

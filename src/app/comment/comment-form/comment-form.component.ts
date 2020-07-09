@@ -1,20 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
 
 @Component({
   selector: 'app-comment-form',
   template: `
-    <p>
-      comment-form works!
-    </p>
+    <app-google-auth
+      ><p auth>
+        comment-form works!
+        {{ auth.signedIn }} - {{ auth.user.email }}
+      </p>
+      <p unauth>
+        require login
+        {{ auth.signedIn }}
+      </p>
+      <p noauth>no auth</p>
+    </app-google-auth>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class CommentFormComponent implements OnInit {
-
-  constructor() { }
+  auth: IAuth;
+  constructor(private authService: GoogleAuthService) {}
 
   ngOnInit(): void {
+    this.auth = this.authService.auth;
   }
-
 }
