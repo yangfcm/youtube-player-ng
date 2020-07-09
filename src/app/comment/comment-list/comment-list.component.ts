@@ -25,11 +25,15 @@ import { environment } from '../../../environments/environment';
       <app-user-message *ngIf="commentData.items.length === 0"
         >No comment</app-user-message
       >
-      <app-comment-item
-        *ngFor="let commentItem of commentData.items"
-        [commentItem]="commentItem"
-      >
-      </app-comment-item>
+      <ng-container *ngFor="let commentItem of commentData.items">
+        <app-comment-item [commentItem]="commentItem"> </app-comment-item>
+        <div style="padding-left: 5%;">
+          <app-comment-reply-list
+            [commentItem]="commentItem"
+          ></app-comment-reply-list>
+        </div>
+        <div class="ui divider"></div>
+      </ng-container>
       <div
         class="ui two column centered grid"
         *ngIf="commentData.nextPageToken"

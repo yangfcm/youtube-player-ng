@@ -24,7 +24,7 @@ export class VideoService {
         params: {
           key: environment.apiKey,
           part: 'snippet,statistics',
-          maxResults: 15,
+          maxResults: '15',
           pageToken,
           ...filter,
         },

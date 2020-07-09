@@ -30,7 +30,7 @@ export class CommentService {
           part: 'snippet',
           videoId,
           pageToken,
-          maxResults: '15',
+          maxResults: '12',
           order: order === 'relevance' ? 'relevance' : 'time',
         },
       })
@@ -90,7 +90,7 @@ export class CommentService {
           key: environment.apiKey,
           part: 'snippet',
           parentId: commentId,
-          maxResults: '15',
+          maxResults: '12',
           pageToken,
         },
       })
