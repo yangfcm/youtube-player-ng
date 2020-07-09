@@ -2,9 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PlaylistService } from '../../playlist/playlist.service';
 import { SearchService } from '../../search/search.service';
 import { IVideoData } from '../interfaces/videoData';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { ISearchResultData } from 'src/app/search/interfaces/searchResultData';
-import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-videos',
@@ -81,11 +80,13 @@ export class SidebarVideosComponent implements OnInit {
             this.sidebarVideosData = data;
           }
           this.errorMessage = '';
-          this.isLoadingNextPage = false;
         },
         (err) => {
           this.errorMessage = err;
           this.sidebarVideosData = undefined;
+        },
+        () => {
+          this.isLoadingNextPage = false;
         }
       );
   }

@@ -36,6 +36,7 @@ export class CommentService {
       })
       .pipe(
         catchError((err) => {
+          console.log(err);
           const errorMessage = this.errorService.createErrorMessage(
             err,
             environment.errorMessage.failedToFetchComment

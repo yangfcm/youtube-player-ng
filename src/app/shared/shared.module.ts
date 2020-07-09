@@ -12,6 +12,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageTitleComponent } from './page-title/page-title.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
     HeaderComponent,
     FooterComponent,
     PageTitleComponent,
+    UserMessageComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [
@@ -38,6 +40,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
     HeaderComponent,
     FooterComponent,
     PageTitleComponent,
+    UserMessageComponent,
   ],
 })
 export class SharedModule {}

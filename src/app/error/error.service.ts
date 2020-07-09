@@ -18,7 +18,9 @@ export class ErrorService {
   createErrorMessage(err: any, custMessage: string) {
     let errorMessage: string;
     console.log(err);
-    if (
+    if (err.error && err.error.error.errors[0].reason === 'commentsDisabled') {
+      errorMessage = environment.errorMessage.commentDisabled;
+    } else if (
       (err.error && err.error.error && err.error.error.code == 404) ||
       err === environment.errorMessage.channelNotFound
     ) {

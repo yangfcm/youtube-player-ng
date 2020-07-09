@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
 import { VideoRoutingModule } from './video-routing.module';
+import { SearchModule } from '../search/search.module';
+import { CommentModule } from '../comment/comment.module';
 
 import { RecommendedVideosComponent } from './recommended-videos/recommended-videos.component';
 import { VideoGridComponent } from './video-grid/video-grid.component';
@@ -14,7 +16,6 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { VideoInfoComponent } from './video-info/video-info.component';
 import { SidebarVideosComponent } from './sidebar-videos/sidebar-videos.component';
-import { SearchModule } from '../search/search.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SearchModule } from '../search/search.module';
     SharedModule,
     AuthModule,
     SearchModule,
+    CommentModule,
   ],
   exports: [VideoGridComponent, VideoListComponent],
 })

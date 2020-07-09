@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../video.service';
-import { PlaylistService } from '../../playlist/playlist.service';
-import { SearchService } from '../../search/search.service';
 import { IVideoDetail } from '../interfaces/videoDetail';
-import { IVideoData } from '../interfaces/videoData';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-video-detail',
@@ -20,6 +16,7 @@ import { Subject } from 'rxjs';
         <div class="sixteen wide tablet ten wide computer column">
           <app-video-player [videoId]="videoId"></app-video-player>
           <app-video-info [videoDetail]="videoDetail"></app-video-info>
+          <app-comment-list [videoId]="videoId"></app-comment-list>
         </div>
         <div class="sixteen wide tablet six wide computer column">
           <app-sidebar-videos
