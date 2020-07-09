@@ -21,16 +21,15 @@ export class ChannelService {
     private errorService: ErrorService,
     private searchService: SearchService,
     private playlistService: PlaylistService
-  ) {
-    this.accessToken = localStorage.getItem('access_token');
-  }
+  ) {}
 
   /** Fetch the channels subscribed by the current user */
   fetchSubscriptions(pageToken = '') {
+    const accessToken = localStorage.getItem('access_token') || '';
     return this.http
       .get<IChannelData>(`${this.apiUrl}/subscriptions`, {
         headers: {
-          Authorization: this.accessToken,
+          Authorization: accessToken,
         },
         params: {
           key: environment.apiKey,
@@ -86,10 +85,12 @@ export class ChannelService {
    * return true, otherwise return false
    */
   fetchChannelSubsctiption(channelId: string) {
+    const accessToken = localStorage.getItem('access_token') || '';
+
     return this.http
       .get<any>(`${this.apiUrl}/subscriptions`, {
         headers: {
-          Authorization: this.accessToken,
+          Authorization: accessToken,
         },
         params: {
           key: environment.apiKey,
@@ -115,6 +116,8 @@ export class ChannelService {
 
   /** Subscribe a channel */
   subscribeChannel(channelId: string) {
+    const accessToken = localStorage.getItem('access_token') || '';
+
     return this.http.post<any>(
       `${this.apiUrl}/subscriptions`,
       {
@@ -127,7 +130,7 @@ export class ChannelService {
       },
       {
         headers: {
-          Authorization: this.accessToken,
+          Authorization: accessToken,
         },
         params: {
           part: 'snippet',
@@ -138,9 +141,11 @@ export class ChannelService {
 
   /** Unsubscribe a channel */
   unsubscribeChannel(subscriptionId: string) {
+    const accessToken = localStorage.getItem('access_token') || '';
+
     return this.http.delete<any>(`${this.apiUrl}/subscriptions`, {
       headers: {
-        Authorization: this.accessToken,
+        Authorization: accessToken,
       },
       params: {
         id: subscriptionId,

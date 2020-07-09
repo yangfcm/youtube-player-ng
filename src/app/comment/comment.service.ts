@@ -19,11 +19,11 @@ export class CommentService {
    * If user is logged in, it will also fetch the comments by the user
    */
   fetchComments(videoId: string, pageToken = '', order = 'relevance') {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token') || '';
     return this.http
       .get<ICommentData>(`${this.apiUrl}/commentThreads`, {
         headers: {
-          Authorization: accessToken || '',
+          Authorization: accessToken,
         },
         params: {
           key: environment.apiKey,
@@ -48,7 +48,7 @@ export class CommentService {
 
   /** Add a comment. Auth required */
   addComment(channelId: string, videoId: string, commentText: string) {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token') || '';
     const requestBody = {
       snippet: {
         channelId,
@@ -83,7 +83,6 @@ export class CommentService {
 
   /** Fetch replies to a comment */
   fetchCommentReplies(commentId: string, pageToken = '') {
-    const accessToken = localStorage.getItem('access_token');
     return this.http
       .get<IReplyData>(`${this.apiUrl}/comments`, {
         params: {

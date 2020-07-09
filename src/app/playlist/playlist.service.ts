@@ -16,7 +16,7 @@ export class PlaylistService {
 
   /** Fetch the playlist created by the current user */
   fetchMyPlaylist(pageToken = '') {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token') || '';
     return this.http
       .get<IPlaylistData>(`${this.apiUrl}/playlists`, {
         headers: {
