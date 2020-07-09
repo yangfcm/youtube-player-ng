@@ -16,7 +16,11 @@ import { IVideoDetail } from '../interfaces/videoDetail';
         <div class="sixteen wide tablet ten wide computer column">
           <app-video-player [videoId]="videoId"></app-video-player>
           <app-video-info [videoDetail]="videoDetail"></app-video-info>
-          <app-comment-list [videoId]="videoId"></app-comment-list>
+          <app-margin></app-margin>
+          <app-comment-list
+            [videoId]="videoId"
+            [channelId]="channelId"
+          ></app-comment-list>
         </div>
         <div class="sixteen wide tablet six wide computer column">
           <app-sidebar-videos
@@ -40,6 +44,10 @@ export class VideoDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private videoService: VideoService
   ) {}
+
+  get channelId() {
+    return this.videoDetail.snippet.channelId;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

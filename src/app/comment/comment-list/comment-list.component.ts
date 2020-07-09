@@ -15,17 +15,21 @@ import { environment } from '../../../environments/environment';
       *ngIf="errorMessage && errorMessage !== commentsDisabled"
       >{{ errorMessage }}</app-error-message
     >
-    <ng-container *ngIf="!errorMessage && commentData">
-      <app-comment-form></app-comment-form>
-      <h3 class="ui header">
+    <ng-container *ngIf="!errorMessage && commentData"
+      ><h3 class="ui header">
         <i class="comments icon"></i>
         <div class="content">
           Comments
         </div>
       </h3>
+      <app-comment-form
+        [videoId]="videoId"
+        [channelId]="channelId"
+      ></app-comment-form>
       <app-user-message *ngIf="commentData.items.length === 0"
         >No comment</app-user-message
       >
+
       <ng-container *ngFor="let commentItem of commentData.items">
         <app-comment-item [commentItem]="commentItem"> </app-comment-item>
         <div style="padding-left: 5%;">
@@ -53,6 +57,7 @@ import { environment } from '../../../environments/environment';
 })
 export class CommentListComponent implements OnInit {
   @Input() videoId: string;
+  @Input() channelId: string;
   commentData: ICommentData;
   errorMessage: string;
   isLoadingNextPage = false;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from '../auth/auth.module';
 import { CommentFormComponent } from './comment-form/comment-form.component';
@@ -14,7 +15,7 @@ import { CommentReplyListComponent } from './comment-reply-list/comment-reply-li
     CommentItemComponent,
     CommentReplyListComponent,
   ],
-  imports: [CommonModule, SharedModule, AuthModule],
-  exports: [CommentListComponent],
+  imports: [CommonModule, FormsModule, SharedModule, AuthModule],
+  exports: [CommentListComponent, CommentFormComponent],
 })
 export class CommentModule {}

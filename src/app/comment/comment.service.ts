@@ -72,11 +72,7 @@ export class CommentService {
       })
       .pipe(
         catchError((err) => {
-          const errorMessage = this.errorService.createErrorMessage(
-            err,
-            environment.errorMessage.failedToFetchComment
-          );
-          throw errorMessage;
+          throw environment.errorMessage.failedToAddComment;
         })
       );
   }
