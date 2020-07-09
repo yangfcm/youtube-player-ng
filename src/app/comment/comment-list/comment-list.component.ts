@@ -7,12 +7,6 @@ import { environment } from '../../../environments/environment';
   selector: 'app-comment-list',
   template: `
     <app-margin></app-margin>
-    <h3 class="ui header">
-      <i class="comments icon"></i>
-      <div class="content">
-        Comments
-      </div>
-    </h3>
     <app-loader *ngIf="!errorMessage && !commentData"></app-loader>
     <app-user-message *ngIf="errorMessage === commentsDisabled">
       {{ commentsDisabled }}</app-user-message
@@ -22,6 +16,13 @@ import { environment } from '../../../environments/environment';
       >{{ errorMessage }}</app-error-message
     >
     <ng-container *ngIf="!errorMessage && commentData">
+      <app-comment-form></app-comment-form>
+      <h3 class="ui header">
+        <i class="comments icon"></i>
+        <div class="content">
+          Comments
+        </div>
+      </h3>
       <app-user-message *ngIf="commentData.items.length === 0"
         >No comment</app-user-message
       >

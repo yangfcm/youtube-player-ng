@@ -23,7 +23,7 @@ export class CommentService {
     return this.http
       .get<ICommentData>(`${this.apiUrl}/commentThreads`, {
         headers: {
-          Authorization: accessToken,
+          Authorization: accessToken || '',
         },
         params: {
           key: environment.apiKey,
