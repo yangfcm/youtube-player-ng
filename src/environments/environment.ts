@@ -4,13 +4,6 @@
 
 export const environment = {
   production: false,
-  clientId:
-    '508026515232-soku2odhh4vqvm4lche3veks3fpo8ctf.apps.googleusercontent.com',
-  scope:
-    'email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl',
-  clientSecret: 'g-SFDUVqZ6LcnhWDxOmiEPgD',
-  apiKey: 'AIzaSyD962bl9_ep9lBz9v4Mj2LVeqsK5HipW3A',
-  apiUrl: 'https://www.googleapis.com/youtube/v3',
   errorMessage: {
     failedToFetchVideo: 'Failed to fetch video',
     failedToSearch: 'Failed to search resources',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { ConfigService } from '../config.service';
 
 export interface IAuthUser {
   email: string;
@@ -30,13 +30,13 @@ export class GoogleAuthService {
   googleAuth: IAuth;
   signedIn: boolean;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
     if (!(window as any).gapi) return;
     (window as any).gapi.load('client:auth2', () => {
       (window as any).gapi.client
         .init({
-          clientId: environment.clientId,
-          scope: environment.scope,
+          clientId: this.configService.config.clientId,
+          scope: this.configService.config.scope,
         })
         .then(() => {
           this.auth = (window as any).gapi.auth2.getAuthInstance();

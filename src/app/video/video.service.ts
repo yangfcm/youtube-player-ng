@@ -5,14 +5,24 @@ import { ErrorService } from '../error/error.service';
 import { environment } from '../../environments/environment';
 import { IVideoData } from './interfaces/videoData';
 import { IVideoDetailData } from './interfaces/videoDetail';
+import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoService {
-  apiUrl = environment.apiUrl;
+  apiUrl: string;
+  apiKey: string;
 
-  constructor(private http: HttpClient, private errorService: ErrorService) {}
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private configService: ConfigService
+  ) {
+    console.log(this.configService.config);
+    this.apiUrl = this.configService.config.apiUrl;
+    this.apiKey = this.configService.config.apiKey;
+  }
 
   /**
    * Get a set of videos based on filter,
@@ -22,7 +32,7 @@ export class VideoService {
     return this.http
       .get<IVideoData>(`${this.apiUrl}/videos`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,statistics',
           maxResults: '15',
           pageToken,
@@ -47,7 +57,7 @@ export class VideoService {
     return this.http
       .get<IVideoDetailData>(`${this.apiUrl}/videos`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,statistics',
           id: videoId,
         },

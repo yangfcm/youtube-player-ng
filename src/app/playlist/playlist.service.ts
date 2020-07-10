@@ -5,14 +5,22 @@ import { ErrorService } from '../error/error.service';
 import { environment } from '../../environments/environment';
 import { IPlaylistData } from './interfaces/playlistData';
 import { IVideoData } from '../video/interfaces/videoData';
+import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlaylistService {
-  apiUrl = environment.apiUrl;
-
-  constructor(private http: HttpClient, private errorService: ErrorService) {}
+  apiUrl: string;
+  apiKey: string;
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private configService: ConfigService
+  ) {
+    this.apiUrl = this.configService.config.apiUrl;
+    this.apiKey = this.configService.config.apiKey;
+  }
 
   /** Fetch the playlist created by the current user */
   fetchMyPlaylist(pageToken = '') {
@@ -23,7 +31,7 @@ export class PlaylistService {
           Authorization: accessToken,
         },
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,
@@ -46,7 +54,7 @@ export class PlaylistService {
     return this.http
       .get<IPlaylistData>(`${this.apiUrl}/playlists`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,
@@ -69,7 +77,7 @@ export class PlaylistService {
     return this.http
       .get<IVideoData>(`${this.apiUrl}/playlistItems`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,contentDetails,status',
           maxResults: '10',
           pageToken,

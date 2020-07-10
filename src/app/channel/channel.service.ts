@@ -8,20 +8,26 @@ import { PlaylistService } from '../playlist/playlist.service';
 import { environment } from '../../environments/environment';
 import { IChannelData } from './interfaces/channelData';
 import { IChannelIntro } from './interfaces/channelIntro';
+import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChannelService {
-  apiUrl = environment.apiUrl;
+  apiUrl: string;
+  apiKey: string;
   accessToken: string;
 
   constructor(
     private http: HttpClient,
     private errorService: ErrorService,
     private searchService: SearchService,
-    private playlistService: PlaylistService
-  ) {}
+    private playlistService: PlaylistService,
+    private configService: ConfigService
+  ) {
+    this.apiUrl = this.configService.config.apiUrl;
+    this.apiKey = this.configService.config.apiKey;
+  }
 
   /** Fetch the channels subscribed by the current user */
   fetchSubscriptions(pageToken = '') {
@@ -32,7 +38,7 @@ export class ChannelService {
           Authorization: accessToken,
         },
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
           maxResults: '50',
           pageToken,
@@ -56,7 +62,7 @@ export class ChannelService {
     return this.http
       .get<IChannelIntro>(`${this.apiUrl}/channels`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet,statistics',
           id: channelId,
         },
@@ -93,7 +99,7 @@ export class ChannelService {
           Authorization: accessToken,
         },
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
           forChannelId: channelId,
           mine: 'true',

@@ -6,14 +6,22 @@ import { environment } from '../../environments/environment';
 import { ICommentData } from './interfaces/commentData';
 import { ICommentItem } from './interfaces/commentItem';
 import { IReplyData } from './interfaces/replyData';
+import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
-  apiUrl = environment.apiUrl;
-
-  constructor(private http: HttpClient, private errorService: ErrorService) {}
+  apiUrl: string;
+  apiKey: string;
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private configService: ConfigService
+  ) {
+    this.apiUrl = this.configService.config.apiUrl;
+    this.apiKey = this.configService.config.apiKey;
+  }
 
   /** Fetch the comments for a video
    * If user is logged in, it will also fetch the comments by the user
@@ -26,7 +34,7 @@ export class CommentService {
           Authorization: accessToken,
         },
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
           videoId,
           pageToken,
@@ -66,7 +74,7 @@ export class CommentService {
           Authorization: accessToken,
         },
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
         },
       })
@@ -82,7 +90,7 @@ export class CommentService {
     return this.http
       .get<IReplyData>(`${this.apiUrl}/comments`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
           parentId: commentId,
           maxResults: '12',

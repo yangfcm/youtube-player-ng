@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ISearchResultData } from './interfaces/searchResultData';
+import { ConfigService } from '../config.service';
 
 interface ISerachCommand {
   filter: object;
@@ -13,15 +14,18 @@ interface ISerachCommand {
   providedIn: 'root',
 })
 export class SearchService {
-  apiUrl = environment.apiUrl;
+  apiUrl: string;
+  apiKey: string;
   // searchInput: Subject<ISerachCommand>;
   // searchResultOutput: Observable<any>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.apiUrl = this.configService.config.apiUrl;
+    this.apiKey = this.configService.config.apiKey;
     // this.searchInput = new Subject<ISerachCommand>();
     // this.searchResultOutput = this.searchInput.pipe(
     // map( (searchCommand) => {
-    //   return new HttpParams().set('key', environment.apiKey)
+    //   return new HttpParams().set('key', this.apiKey)
     //     .set('part', 'snippet')
     //     .set('maxResults', '15')
     //     .set('pageToken', searchCommand.pageToken )
@@ -44,7 +48,7 @@ export class SearchService {
     return this.http
       .get<ISearchResultData>(`${this.apiUrl}/search`, {
         params: {
-          key: environment.apiKey,
+          key: this.apiKey,
           part: 'snippet',
           maxResults: '15',
           pageToken,
