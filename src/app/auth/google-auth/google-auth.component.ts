@@ -30,6 +30,7 @@ export class GoogleAuthComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.auth = this.googleAuthService.auth;
     this.auth$ = this.googleAuthService.authEmitter.subscribe(
       (data) => {
         this.ngZone.run(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -33,15 +33,22 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     `,
   ],
 })
-export class VideoPlayerComponent implements OnInit {
+export class VideoPlayerComponent implements OnInit, OnChanges {
   @Input() videoId: string;
   videoSrc: SafeResourceUrl;
+  getVideoSrc(): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${this.videoId}`
+    );
+  }
 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.videoSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${this.videoId}`
-    );
+    this.videoSrc = this.getVideoSrc();
+  }
+
+  ngOnChanges() {
+    this.videoSrc = this.getVideoSrc();
   }
 }

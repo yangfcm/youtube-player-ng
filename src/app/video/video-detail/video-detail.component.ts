@@ -52,11 +52,11 @@ export class VideoDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.videoId = params.id;
+      this.fetchVideoDetail();
     });
     this.route.queryParams.subscribe((params) => {
       this.playlistId = params.playlistId;
     });
-    this.fetchVideoDetail();
   }
 
   fetchVideoDetail() {

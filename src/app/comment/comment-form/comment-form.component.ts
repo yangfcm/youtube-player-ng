@@ -31,6 +31,7 @@ import { ICommentItem } from '../interfaces/commentItem';
           <div class="ui divider"></div>
         </div>
       </div>
+      <div noauth>no auth</div>
     </app-google-auth>
   `,
   styles: [],

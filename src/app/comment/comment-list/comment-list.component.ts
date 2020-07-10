@@ -66,6 +66,14 @@ export class CommentListComponent implements OnInit {
   constructor(private commentService: CommentService) {}
 
   ngOnInit(): void {
+    this.fetchComments();
+  }
+
+  ngOnChanges(): void {
+    this.fetchComments();
+  }
+
+  fetchComments() {
     this.commentService.fetchComments(this.videoId).subscribe(
       (data: ICommentData) => {
         this.commentData = data;

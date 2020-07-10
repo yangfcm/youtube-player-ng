@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  SimpleChanges,
+} from '@angular/core';
 import { PlaylistService } from '../../playlist/playlist.service';
 import { SearchService } from '../../search/search.service';
 import { IVideoData } from '../interfaces/videoData';
@@ -30,7 +36,7 @@ import { ISearchResultData } from 'src/app/search/interfaces/searchResultData';
   `,
   styles: [],
 })
-export class SidebarVideosComponent implements OnInit {
+export class SidebarVideosComponent implements OnInit, OnChanges {
   @Input() playlistId: string;
   @Input() videoId: string;
 
@@ -44,11 +50,12 @@ export class SidebarVideosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.playlistId) {
-      this.fetchPlaylistVideos();
-    } else if (this.videoId) {
-      this.fetchRelatedVideos();
-    }
+    this.fetchSidebarVideos();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.playlistId && !changes.playlistId) return;
+    this.fetchSidebarVideos();
   }
 
   fetchSidebarVideos(pageToken = '') {
