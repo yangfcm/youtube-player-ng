@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SubscribedChannelsComponent } from './subscribed-channels/subscribed-channels.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 import { ChannelDetailComponent } from './channel-detail/channel-detail.component';
 import { HomeComponent } from './home/home.component';
 import { ChannelVideosComponent } from './channel-videos/channel-videos.component';
@@ -46,7 +46,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        component: SubscribedChannelsComponent,
+        component: SubscriptionComponent,
       },
     ],
   },

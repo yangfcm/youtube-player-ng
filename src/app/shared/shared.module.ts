@@ -17,6 +17,7 @@ import { UserBannerComponent } from './user-banner/user-banner.component';
 import { AuthUserBannerComponent } from './auth-user-banner/auth-user-banner.component';
 import { UnauthUserBannerComponent } from './unauth-user-banner/unauth-user-banner.component';
 import { AuthModule } from '../auth/auth.module';
+import { EmptyComponent } from './empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthModule } from '../auth/auth.module';
     UserBannerComponent,
     AuthUserBannerComponent,
     UnauthUserBannerComponent,
+    EmptyComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, AuthModule],
   exports: [
@@ -49,6 +51,7 @@ import { AuthModule } from '../auth/auth.module';
     PageTitleComponent,
     UserMessageComponent,
     UserBannerComponent,
+    EmptyComponent,
   ],
 })
 export class SharedModule {}

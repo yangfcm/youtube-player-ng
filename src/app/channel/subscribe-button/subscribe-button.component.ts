@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChannelService } from '../channel.service';
-import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
+import { IAuth } from '../../auth/google-auth.service';
 
 enum ButtonText {
   Unsubscribe = 'Unsubscribe',
@@ -32,33 +32,19 @@ enum ButtonText {
   styles: [],
 })
 export class SubscribeButtonComponent implements OnInit {
-  @Input() channelId: string;
+  @Input() props: any;
+  @Input() auth: IAuth;
+
+  get channelId() {
+    return this.props.channelId;
+  }
   subscriptionId: string;
-  auth: IAuth;
   isProcessing = false;
   buttonText: ButtonText;
 
-  constructor(
-    private channelService: ChannelService,
-    private googleAuthService: GoogleAuthService,
-    private ngZone: NgZone
-  ) {}
+  constructor(private channelService: ChannelService) {}
 
   ngOnInit(): void {
-    this.auth = this.googleAuthService.googleAuth;
-    this.googleAuthService.authEmitter.subscribe(
-      (data) => {
-        this.ngZone.run(() => {
-          this.auth = data;
-          this.fetchSubscriptionId();
-        });
-      },
-      (err) => {
-        console.log(err);
-        this.subscriptionId = '';
-      }
-    );
-
     if (this.auth && this.auth.signedIn) {
       this.fetchSubscriptionId();
     }

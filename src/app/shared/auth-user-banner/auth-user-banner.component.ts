@@ -54,10 +54,8 @@ import { IAuth } from 'src/app/auth/google-auth.service';
   ],
 })
 export class AuthUserBannerComponent implements OnInit {
-  auth: IAuth;
+  @Input() auth: IAuth;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.auth);
-  }
+  ngOnInit(): void {}
 }

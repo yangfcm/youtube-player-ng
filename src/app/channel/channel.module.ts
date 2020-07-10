@@ -14,6 +14,8 @@ import { ChannelVideosComponent } from './channel-videos/channel-videos.componen
 import { ChannelPlaylistComponent } from './channel-playlist/channel-playlist.component';
 import { ChannelNavComponent } from './channel-nav/channel-nav.component';
 import { SubscribeButtonComponent } from './subscribe-button/subscribe-button.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { SubscribeButtonAuthComponent } from './subscribe-button-auth/subscribe-button-auth.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SubscribeButtonComponent } from './subscribe-button/subscribe-button.co
     ChannelPlaylistComponent,
     ChannelNavComponent,
     SubscribeButtonComponent,
+    SubscriptionComponent,
+    SubscribeButtonAuthComponent,
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@ export interface IAuth {
 }
 export interface IAuthComponent {
   auth: IAuth;
+  props: any;
 }
 
 @Injectable({

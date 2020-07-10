@@ -19,9 +19,9 @@ import { IChannelIntro } from '../interfaces/channelIntro';
         </div>
       </div>
       <div>
-        <app-subscribe-button
+        <app-subscribe-button-auth
           [channelId]="channelIntro.id"
-        ></app-subscribe-button>
+        ></app-subscribe-button-auth>
       </div>
     </div>
   `,

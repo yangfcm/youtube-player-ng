@@ -36,8 +36,14 @@ import { ICommentItem } from '../interfaces/commentItem';
   styles: [],
 })
 export class CommentFormComponent implements OnInit {
-  @Input() videoId: string;
-  @Input() channelId: string;
+  @Input() props: any;
+
+  get videoId() {
+    return this.props.videoId;
+  }
+  get channelId() {
+    return this.props.channelId;
+  }
 
   commentText = '';
   errorMessage = '';

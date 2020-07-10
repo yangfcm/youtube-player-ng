@@ -7,6 +7,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { CommentItemComponent } from './comment-item/comment-item.component';
 import { CommentReplyListComponent } from './comment-reply-list/comment-reply-list.component';
+import { CommentFormAuthComponent } from './comment-form-auth/comment-form-auth.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CommentReplyListComponent } from './comment-reply-list/comment-reply-li
     CommentListComponent,
     CommentItemComponent,
     CommentReplyListComponent,
+    CommentFormAuthComponent,
   ],
   imports: [CommonModule, FormsModule, SharedModule, AuthModule],
   exports: [CommentListComponent, CommentFormComponent],

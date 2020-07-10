@@ -22,10 +22,10 @@ import { environment } from '../../../environments/environment';
           Comments
         </div>
       </h3>
-      <app-comment-form
+      <app-comment-form-auth
         [videoId]="videoId"
         [channelId]="channelId"
-      ></app-comment-form>
+      ></app-comment-form-auth>
       <app-user-message *ngIf="commentData.items.length === 0"
         >No comment</app-user-message
       >

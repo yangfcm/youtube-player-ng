@@ -1,47 +1,39 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { IAuth } from '../../auth/google-auth.service';
 import { ChannelService } from '../channel.service';
 import { IChannelData } from '../interfaces/channelData';
 
 @Component({
   selector: 'app-subscribed-channels',
   template: `
-    <app-user-banner></app-user-banner>
-    <app-nav></app-nav>
-    <app-margin></app-margin>
-    <ng-container *ngIf="auth && auth.signedIn">
-      <app-loader *ngIf="!errorMessage && !subscriptionData"></app-loader>
-      <app-error-message *ngIf="errorMessage"
-        >{{ errorMessage }}
+    <app-loader *ngIf="!errorMessage && !subscriptionData"></app-loader>
+    <app-error-message *ngIf="errorMessage"
+      >{{ errorMessage }}
+    </app-error-message>
+    <ng-container *ngIf="subscriptionData && !errorMessage">
+      <app-page-title>My Subscriptions</app-page-title>
+      <app-error-message *ngIf="subscriptionData.items.length === 0">
+        You have not subscribed any channel.
       </app-error-message>
-      <ng-container *ngIf="subscriptionData && !errorMessage">
-        <app-page-title>My Subscriptions</app-page-title>
-        <app-error-message *ngIf="subscriptionData.items.length === 0">
-          You have not subscribed any channel.
-        </app-error-message>
-        <div class="app-subscribed-channel-container">
-          <app-subscribed-channel-item
-            *ngFor="let channel of subscriptionData.items"
-            [channel]="channel"
-          ></app-subscribed-channel-item>
+      <div class="app-subscribed-channel-container">
+        <app-subscribed-channel-item
+          *ngFor="let channel of subscriptionData.items"
+          [channel]="channel"
+        ></app-subscribed-channel-item>
+      </div>
+      <app-margin></app-margin>
+      <div
+        class="ui two column centered grid"
+        *ngIf="subscriptionData.nextPageToken"
+      >
+        <div class="column">
+          <app-more-button
+            [nextPageToken]="subscriptionData.nextPageToken"
+            (onNextPage)="handleNextPage($event)"
+            >More channels...</app-more-button
+          >
         </div>
-        <app-margin></app-margin>
-        <div
-          class="ui two column centered grid"
-          *ngIf="subscriptionData.nextPageToken"
-        >
-          <div class="column">
-            <app-more-button
-              [nextPageToken]="subscriptionData.nextPageToken"
-              (onNextPage)="handleNextPage($event)"
-              >More channels...</app-more-button
-            >
-          </div>
-        </div>
-      </ng-container>
-    </ng-container>
-    <ng-container *ngIf="auth && auth.signedIn === false">
-      <app-require-signin></app-require-signin>
+      </div>
     </ng-container>
   `,
   styles: [
@@ -55,35 +47,14 @@ import { IChannelData } from '../interfaces/channelData';
   ],
 })
 export class SubscribedChannelsComponent implements OnInit {
-  auth: IAuth;
+  @Input() auth: IAuth;
   errorMessage = '';
   subscriptionData: IChannelData;
   isLoadingNextPage = false;
 
-  constructor(
-    private googleAuthService: GoogleAuthService,
-    private channelService: ChannelService,
-    private ngZone: NgZone
-  ) {}
+  constructor(private channelService: ChannelService) {}
 
   ngOnInit(): void {
-    this.auth = this.googleAuthService.googleAuth;
-    this.googleAuthService.authEmitter.subscribe(
-      (data) => {
-        this.ngZone.run(() => {
-          this.auth = data;
-          this.fetchSubscription();
-        });
-      },
-      (err) => {
-        console.log(err.message);
-        this.auth = {
-          signedIn: false,
-          user: undefined,
-        };
-      }
-    );
-
     if (this.auth && this.auth.signedIn) {
       this.fetchSubscription();
     }

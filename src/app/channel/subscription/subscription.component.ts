@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MyAuthPlaylistComponent } from '../my-auth-playlist/my-auth-playlist.component';
+import { SubscribedChannelsComponent } from '../subscribed-channels/subscribed-channels.component';
 import { RequireSigninComponent } from '../../shared/require-signin/require-signin.component';
 
 @Component({
-  selector: 'app-my-playlist',
+  selector: 'app-subscription',
   template: `
     <app-user-banner></app-user-banner>
     <app-nav></app-nav>
     <app-margin></app-margin>
     <app-google-auth
-      [AuthedComponent]="MyAuthPlaylistComponent"
+      [AuthedComponent]="SubscribedChannelsComponent"
       [UnauthedComponent]="RequireSigninComponent"
     ></app-google-auth>
   `,
   styles: [],
 })
-export class MyPlaylistComponent implements OnInit {
+export class SubscriptionComponent implements OnInit {
   RequireSigninComponent = RequireSigninComponent;
-  MyAuthPlaylistComponent = MyAuthPlaylistComponent;
+  SubscribedChannelsComponent = SubscribedChannelsComponent;
   constructor() {}
 
   ngOnInit(): void {}

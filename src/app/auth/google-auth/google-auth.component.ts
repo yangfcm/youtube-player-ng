@@ -23,6 +23,7 @@ import { IAuthComponent } from '../google-auth.service';
 export class GoogleAuthComponent implements OnInit {
   @Input() AuthedComponent;
   @Input() UnauthedComponent;
+  @Input() props: any;
   @ViewChild(GoogleAuthDirective, { static: true })
   appGoogleAuth: GoogleAuthDirective;
   auth: IAuth;
@@ -36,36 +37,33 @@ export class GoogleAuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth = this.googleAuthService.googleAuth;
-    if (this.auth && this.auth.signedIn) {
-      this.loadAuthedComponent();
-      return;
+    if (this.auth) {
+      this.loadComponent();
     }
-    if (this.auth && !this.auth.signedIn) {
-      this.loadUnauthedComponent();
-      return;
-    }
-    console.log('google auth');
+    // console.log('google auth');
     this.auth$ = this.googleAuthService.authEmitter.subscribe(
       (data) => {
         this.ngZone.run(() => {
           this.auth = data;
-          if (this.auth.signedIn) {
-            this.loadAuthedComponent();
-          } else {
-            this.loadUnauthedComponent();
-          }
+          this.loadComponent();
         });
-        console.log(this.auth);
+        // console.log(this.auth);
       },
       (err) => {
-        console.log(err.message);
+        // console.log(err.message);
         this.auth = undefined;
         this.loadUnauthedComponent();
       }
     );
   }
 
-  loadComponent() {}
+  loadComponent() {
+    if (this.auth.signedIn) {
+      this.loadAuthedComponent();
+    } else {
+      this.loadUnauthedComponent();
+    }
+  }
 
   loadAuthedComponent() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
@@ -74,7 +72,8 @@ export class GoogleAuthComponent implements OnInit {
     const viewContainerRef = this.appGoogleAuth.viewContainerRef;
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent(componentFactory);
-    (componentRef.instance as IAuthComponent).auth = this.auth;
+    (componentRef.instance as IAuthComponent).auth = this.auth; // Auth information passed
+    (componentRef.instance as IAuthComponent).props = this.props; // Other information passed as props.
   }
 
   loadUnauthedComponent() {

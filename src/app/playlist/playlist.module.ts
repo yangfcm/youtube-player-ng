@@ -9,6 +9,7 @@ import { PlaylistItemComponent } from './playlist-item/playlist-item.component';
 import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistListComponent } from './playlist-list/playlist-list.component';
+import { MyAuthPlaylistComponent } from './my-auth-playlist/my-auth-playlist.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PlaylistListComponent } from './playlist-list/playlist-list.component';
     PlaylistDetailComponent,
     HomeComponent,
     PlaylistListComponent,
+    MyAuthPlaylistComponent,
   ],
   imports: [
     CommonModule,
