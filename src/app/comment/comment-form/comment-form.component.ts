@@ -5,34 +5,33 @@ import { ICommentItem } from '../interfaces/commentItem';
 @Component({
   selector: 'app-comment-form',
   template: `
-    <app-google-auth
-      ><div auth>
-        <div class="ui form">
-          <div class="field">
-            <label>Publish your comment</label>
-            <textarea rows="2" [(ngModel)]="commentText"></textarea>
-          </div>
-          <div class="ui red message" *ngIf="errorMessage">
-            {{ errorMessage }}
-          </div>
-          <div>
-            <button
-              class="ui primary button"
-              (click)="handlePublishComment()"
-              [disabled]="!commentText.trim() || isPublishing"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        <div class="ui divider"></div>
-        <div *ngFor="let commentItem of publishedComments">
-          <app-comment-item [commentItem]="commentItem"> </app-comment-item>
-          <div class="ui divider"></div>
-        </div>
+    <!-- <app-google-auth
+      ><div auth> -->
+    <div class="ui form">
+      <div class="field">
+        <label>Publish your comment</label>
+        <textarea rows="2" [(ngModel)]="commentText"></textarea>
       </div>
-      <div noauth>no auth</div>
-    </app-google-auth>
+      <div class="ui red message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <div>
+        <button
+          class="ui primary button"
+          (click)="handlePublishComment()"
+          [disabled]="!commentText.trim() || isPublishing"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div *ngFor="let commentItem of publishedComments">
+      <app-comment-item [commentItem]="commentItem"> </app-comment-item>
+      <div class="ui divider"></div>
+    </div>
+    <!-- </div> 
+    </app-google-auth> -->
   `,
   styles: [],
 })

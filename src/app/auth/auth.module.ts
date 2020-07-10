@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserBannerComponent } from './user-banner/user-banner.component';
 import { GoogleAuthComponent } from './google-auth/google-auth.component';
+import { GoogleAuthDirective } from './google-auth.directive';
 
 @NgModule({
-  declarations: [UserBannerComponent, GoogleAuthComponent],
+  declarations: [GoogleAuthComponent, GoogleAuthDirective],
   imports: [CommonModule],
-  exports: [UserBannerComponent, GoogleAuthComponent],
+  exports: [GoogleAuthComponent],
 })
 export class AuthModule {}

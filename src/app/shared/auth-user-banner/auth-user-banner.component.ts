@@ -1,8 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { IAuth } from 'src/app/auth/google-auth.service';
 
 @Component({
-  selector: 'app-user-banner',
+  selector: 'app-auth-user-banner',
   template: `
     <div class="app-banner-container">
       <ng-container *ngIf="auth">
@@ -53,25 +53,11 @@ import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
     `,
   ],
 })
-export class UserBannerComponent implements OnInit {
+export class AuthUserBannerComponent implements OnInit {
   auth: IAuth;
-  constructor(
-    private googleAuthService: GoogleAuthService,
-    private ngZone: NgZone
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.auth = this.googleAuthService.googleAuth;
-    this.googleAuthService.authEmitter.subscribe(
-      (data) => {
-        this.ngZone.run(() => {
-          this.auth = data;
-        });
-      },
-      (err) => {
-        console.log(err.message);
-        this.auth = undefined;
-      }
-    );
+    console.log(this.auth);
   }
 }

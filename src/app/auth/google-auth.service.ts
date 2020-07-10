@@ -16,6 +16,9 @@ export interface IAuth {
   user: IAuthUser;
   signedIn: boolean;
 }
+export interface IAuthComponent {
+  auth: IAuth;
+}
 
 @Injectable({
   providedIn: 'root',

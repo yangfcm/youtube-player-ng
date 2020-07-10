@@ -13,6 +13,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { UserMessageComponent } from './user-message/user-message.component';
+import { UserBannerComponent } from './user-banner/user-banner.component';
+import { AuthUserBannerComponent } from './auth-user-banner/auth-user-banner.component';
+import { UnauthUserBannerComponent } from './unauth-user-banner/unauth-user-banner.component';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -27,8 +31,11 @@ import { UserMessageComponent } from './user-message/user-message.component';
     FooterComponent,
     PageTitleComponent,
     UserMessageComponent,
+    UserBannerComponent,
+    AuthUserBannerComponent,
+    UnauthUserBannerComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, AuthModule],
   exports: [
     LoaderComponent,
     ErrorMessageComponent,
@@ -41,6 +48,7 @@ import { UserMessageComponent } from './user-message/user-message.component';
     FooterComponent,
     PageTitleComponent,
     UserMessageComponent,
+    UserBannerComponent,
   ],
 })
 export class SharedModule {}
