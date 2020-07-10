@@ -62,7 +62,7 @@ export class VideoDetailComponent implements OnInit {
   fetchVideoDetail() {
     this.videoService.fetchVideo(this.videoId).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         if (!data) {
           this.router.navigateByUrl('/not-found');
           return;

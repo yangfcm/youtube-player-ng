@@ -49,12 +49,12 @@ export class PlaylistDetailComponent implements OnInit {
 
     this.playlistService.fetchPlaylistDetails(this.playlistId).subscribe(
       (data: IVideoData) => {
-        console.log(data);
+        // console.log(data);
         this.playlistDetailData = data;
         this.errorMessage = '';
       },
       (err) => {
-        console.log(err);
+        // console.log(err);
         if (err === environment.errorMessage.notFound) {
           this.router.navigateByUrl('/not-found');
         } else {
