@@ -19,7 +19,7 @@ export class VideoService {
     private errorService: ErrorService,
     private configService: ConfigService
   ) {
-    console.log(this.configService.config);
+    // console.log(this.configService.config);
     this.apiUrl = this.configService.config.apiUrl;
     this.apiKey = this.configService.config.apiKey;
   }
