@@ -21,6 +21,7 @@ import { EmptyComponent } from './empty/empty.component';
 import { SigninButtonComponent } from './signin-button/signin-button.component';
 import { UserPictureComponent } from './user-picture/user-picture.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UserHeaderComponent } from './user-header/user-header.component';
     SigninButtonComponent,
     UserPictureComponent,
     UserHeaderComponent,
+    SearchInputComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, AuthModule],
   exports: [

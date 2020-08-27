@@ -1,5 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -11,44 +10,18 @@ import { Router } from '@angular/router';
       >
       <div class="right menu">
         <div class="item">
-          <div class="ui icon input" style="min-width: 10px;">
-            <input
-              type="text"
-              placeholder="Search video..."
-              [(ngModel)]="searchKeyWord"
-            />
-            <i class="search icon link" (click)="handleSearch()"></i>
-          </div>
+          <app-search-input></app-search-input>
           <app-user-header></app-user-header>
         </div>
       </div>
     </div>
   `,
-  styles: [
-    `
-      .app-dropdown-container {
-        position: relative;
-        margin-left: 1rem;
-      }
-      .app-dropdown-menu {
-        position: absolute;
-        right: 0;
-        top: 105%;
-        z-index: 10;
-      }
-    `,
-  ],
+  styles: [],
 })
 export class HeaderComponent implements OnInit {
   searchKeyWord = '';
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  handleSearch() {
-    if (this.searchKeyWord.trim() === '') return;
-    this.router.navigateByUrl(`/search/${this.searchKeyWord.trim()}`);
-    this.searchKeyWord = '';
-  }
 }
