@@ -18,6 +18,9 @@ import { AuthUserBannerComponent } from './auth-user-banner/auth-user-banner.com
 import { UnauthUserBannerComponent } from './unauth-user-banner/unauth-user-banner.component';
 import { AuthModule } from '../auth/auth.module';
 import { EmptyComponent } from './empty/empty.component';
+import { SigninButtonComponent } from './signin-button/signin-button.component';
+import { UserPictureComponent } from './user-picture/user-picture.component';
+import { UserHeaderComponent } from './user-header/user-header.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { EmptyComponent } from './empty/empty.component';
     AuthUserBannerComponent,
     UnauthUserBannerComponent,
     EmptyComponent,
+    SigninButtonComponent,
+    UserPictureComponent,
+    UserHeaderComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, AuthModule],
   exports: [

@@ -5,9 +5,7 @@ import { IVideoItem } from '../interfaces/videoItem';
   selector: 'app-video-grid',
   template: `
     <div class="ui segment basic" *ngIf="!videos || videos.length === 0">
-      <h3 class="ui center aligned header red">
-        No videos displayed
-      </h3>
+      <h3 class="ui center aligned header red">No videos displayed</h3>
     </div>
     <div class="app-video-grid" *ngIf="videos && videos.length > 0">
       <app-video-grid-item
@@ -20,8 +18,8 @@ import { IVideoItem } from '../interfaces/videoItem';
     `
       .app-video-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-        gap: 1.8rem;
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        gap: 1rem;
       }
     `,
   ],

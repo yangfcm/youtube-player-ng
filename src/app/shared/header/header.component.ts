@@ -1,7 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleAuthService, IAuth } from '../../auth/google-auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -21,29 +19,7 @@ import { Subscription } from 'rxjs';
             />
             <i class="search icon link" (click)="handleSearch()"></i>
           </div>
-          <div *ngIf="auth">
-            <button
-              *ngIf="auth.signedIn === false"
-              class="ui youtube button"
-              style="margin-left: 1rem; width: 110px;"
-              (click)="handleSignIn()"
-            >
-              <i class="youtube icon"></i>
-              Sign in
-            </button>
-            <div *ngIf="auth.signedIn === true" class="app-dropdown-container">
-              <img
-                [src]="auth.user.picture"
-                class="ui tiny image circular"
-                (click)="toggleShowDropdown($event)"
-                style="cursor: pointer; max-height: 60px; width: auto;"
-              />
-              <app-dropdown
-                class="app-dropdown-menu"
-                *ngIf="showDropdown"
-              ></app-dropdown>
-            </div>
-          </div>
+          <app-user-header></app-user-header>
         </div>
       </div>
     </div>
@@ -65,47 +41,14 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   searchKeyWord = '';
-  auth$: Subscription;
-  auth: IAuth;
-  showDropdown = false;
 
-  constructor(
-    private router: Router,
-    private googleAuthService: GoogleAuthService,
-    private ngZone: NgZone
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.auth$ = this.googleAuthService.authEmitter.subscribe(
-      (data) => {
-        this.ngZone.run(() => {
-          // Must be wrapped by ngZone.run(), otherwise the view cannot be updated.
-          // Reference: https://stackoverflow.com/questions/50519200/angular-6-view-is-not-updated-after-changing-a-variable-within-subscribe
-          this.auth = data;
-        });
-      },
-      (err) => {
-        console.log(err.message);
-        this.auth = undefined;
-      }
-    );
-    window.addEventListener('click', () => {
-      this.showDropdown = false;
-    });
-  }
+  ngOnInit(): void {}
 
   handleSearch() {
     if (this.searchKeyWord.trim() === '') return;
     this.router.navigateByUrl(`/search/${this.searchKeyWord.trim()}`);
     this.searchKeyWord = '';
-  }
-
-  handleSignIn() {
-    this.googleAuthService.googleSignIn();
-  }
-
-  toggleShowDropdown($event) {
-    this.showDropdown = !this.showDropdown;
-    $event.stopPropagation();
   }
 }
