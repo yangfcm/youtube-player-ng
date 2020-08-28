@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
 import { LoaderComponent } from './loader.component';
 
 describe('LoaderComponent', () => {
@@ -8,9 +9,8 @@ describe('LoaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderComponent ]
-    })
-    .compileComponents();
+      declarations: [LoaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +21,12 @@ describe('LoaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have correct class value', () => {
+    const loader = fixture.debugElement.query(
+      By.css('div.ui.active.centered.inline.loader')
+    );
+    expect(loader).toBeTruthy();
   });
 });
