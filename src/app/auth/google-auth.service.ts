@@ -51,7 +51,8 @@ export class GoogleAuthService {
       // Sign in
       const googleAuthUser = this.auth.currentUser.get();
       // Get and save auth token
-      const accessToken = `${googleAuthUser.wc.token_type} ${googleAuthUser.wc.access_token}`;
+      console.log(googleAuthUser);
+      const accessToken = `${googleAuthUser.xc.token_type} ${googleAuthUser.xc.access_token}`;
       localStorage.setItem('access_token', accessToken);
       this.http
         .get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', {
