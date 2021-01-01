@@ -4,7 +4,7 @@ import { IVideoItem } from '../interfaces/videoItem';
 @Component({
   selector: 'app-video-list-item',
   template: `
-    <div class="ui card app-list-card">
+    <div class="ui card app-list-card" *ngIf="video.snippet">
       <a
         class=" app-card-image-container"
         [routerLink]="['/video/' + videoId]"
@@ -70,7 +70,7 @@ export class VideoListItemComponent implements OnInit {
 
   get videoId() {
     let videoId = '';
-    if (this.video && this.video.snippet.resourceId) {
+    if (this.video && this.video.snippet && this.video.snippet.resourceId) {
       videoId = this.video.snippet.resourceId.videoId;
     } else if (this.video && this.video.id) {
       videoId = (this.video.id as {
