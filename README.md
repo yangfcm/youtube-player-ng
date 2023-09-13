@@ -19,7 +19,7 @@ A lightweight, ad-free Youtube video watching app built with Angular and Google 
 
 - Install Node.js and NPM.
 - Under project root directory, run `npm install` to install packages.
-- Create `assets/config.json` file under project root directory to specify API key and user's channel id:
+- Create `assets/config.json` file under project `/src` directory to specify API key and user's channel id:
 
   ```json
   {

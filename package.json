@@ -1,6 +1,9 @@
 {
   "name": "ng-my-youtube",
   "version": "0.0.0",
+  "engines": {
+    "node": "^16.19.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
